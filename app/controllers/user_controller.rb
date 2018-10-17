@@ -8,9 +8,8 @@ class UserController < ApplicationController
     end
 
     post '/users/signup' do
-        binding.pry
         if !params.any?{|key, value| value == ""}
-            @user = User.new(:username => params["username"], :email => params["email"], :password => params["password"], :reputation => 0)
+            @user = User.new(:username => params["username"].downcase, :email => params["email"], :password => params["password"], :reputation => 0)
             if @user.save
                 session[:user_id] = @user.id
                 flash[:message] = "Account was successfully created."
@@ -26,7 +25,19 @@ class UserController < ApplicationController
         end
     end
 
-    post '/login' do 
+    post '/users/login' do 
+        binding.pry
+        @user = User.find_by(:username => params["username"])
+
+        if @user && @user.authenticate(params["password"])
+            session.clear
+            session[:user_id] = @user.id
+            flash[:message] = "Welcome, #{@user.username}" 
+            redirect '/'
+        else 
+            flash[:message] = "Uh oh! Something went wrong. Please try again." 
+            redirect '/users/login'
+        end
     end
 
     get '/users/logout' do
