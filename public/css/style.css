@@ -14,7 +14,6 @@ body {
     /* background-color: rgba(116, 202, 241, 0.795); */
     background: rgba(75, 71, 71, 0.897);
 }
-
 .navbar-light .navbar-brand {
     font-family: 'Bungee', cursive;
     color: rgb(170, 218, 226);
@@ -55,3 +54,12 @@ body {
     background-size: 100% 100%;
 }
 
+.box1 {
+    background-color: rgba(75, 71, 71, 0.897)!important;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
