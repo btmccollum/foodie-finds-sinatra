@@ -95,3 +95,9 @@ body {
    padding-left: 10px;
    width: 97%;
 }
+
+.flashmessage{
+    color: white;
+    position: flex;
+    text-align: center;
+}

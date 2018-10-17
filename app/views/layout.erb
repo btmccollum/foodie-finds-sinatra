@@ -30,11 +30,11 @@
               <ul class="nav navbar-nav ml-auto w-100 justify-content-end">   
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    UserName Placeholder
+                    <%= current_user.username %>
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#">My Profile</a>
-                    <a class="dropdown-item" href="#">Log Out</a>
+                    <a class="dropdown-item" href="/users/logout">Log Out</a>
                   </div>
                 </li>                     
               </ul>
@@ -42,7 +42,7 @@
               <ul class="nav navbar-nav ml-auto w-100 justify-content-end">   
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Account
+                    Join In
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/users/login">Log In</a>
