@@ -11,7 +11,6 @@ body {
 }
 
 .top-of-page {
-    /* background-color: rgba(116, 202, 241, 0.795); */
     background: rgba(75, 71, 71, 0.897);
 }
 .navbar-light .navbar-brand {
@@ -31,7 +30,7 @@ body {
     position: fixed;
     bottom: 0;
     width: 100%;
-    padding-right: 10px;
+    padding-right: 25px;
     text-align: right;
 }
 
@@ -62,4 +61,38 @@ body {
     height: auto;
     max-height: 200px;
     overflow-x: hidden;
+}
+
+.btn-primary.login {
+    font-family: 'BioRhyme', serif;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(75, 71, 71, 0.897);
+    border-color: white;
+}
+
+.reminder {
+    font-style: italic;
+    font-size: .7em;
+    color: rgba(201, 202, 202, 0.938);
+    padding-left: 20px;
+}
+
+.signupbox {
+    background-color: rgba(6, 30, 58, 0.685);
+    padding-top: 20px;
+    border: 1px solid white;
+    border-radius: 10px;
+    color: white;
+}
+
+.col-form-label {
+    float: left;
+}
+
+.form-control {
+   display: flex;
+   float: right;
+   padding-left: 10px;
+   width: 97%;
 }
