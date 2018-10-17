@@ -6,3 +6,52 @@ img, video, audio, iframe, table, form {
 }
 
 /*/////// LAYOUT STYLES ////////*/
+body {
+    background: rgba(75, 71, 71, 0.37);
+}
+
+.top-of-page {
+    /* background-color: rgba(116, 202, 241, 0.795); */
+    background: rgba(75, 71, 71, 0.897);
+}
+
+.navbar-light .navbar-brand {
+    font-family: 'Bungee', cursive;
+    color: rgb(170, 218, 226);
+    font-size:1.5em;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    font-family: 'BioRhyme', serif;
+    color: white;
+}
+
+.branding {
+    font-style: italic;
+    font-size: .8em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-right: 10px;
+    text-align: right;
+}
+
+.col-sm-12.top-nav-bar {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.navbar-toggler {
+    border-radius: 50%;
+    background: white;
+}
+.navbar-toggler-icon {
+    display: inline-block;
+    width: .6em;
+    height: 1.25em;
+    vertical-align: middle;
+    content: "";
+    background: no-repeat center center;
+    background-size: 100% 100%;
+}
+

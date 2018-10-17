@@ -57,13 +57,6 @@ posts_list.each do |user, hash|
     post.save
 end
 
-# create_table :comments do |t|
-#     t.string :content
-#     t.integer :score
-#     t.integer :user_id
-#     t.timestamps null:true
-#   end
-
 comments_list = {
     1 => {
         :content => "Wow that does sound good, did they have any other unique types of cookies??",
