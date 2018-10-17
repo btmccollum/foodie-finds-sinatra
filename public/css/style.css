@@ -30,8 +30,7 @@ body {
     position: fixed;
     bottom: 0;
     width: 100%;
-    padding-right: 25px;
-    text-align: right;
+    text-align: left;
 }
 
 .col-sm-12.top-nav-bar {
