@@ -1,8 +1,8 @@
 
 <div class="container new-post">
     <div class="row">
-        <form action="/categories/<%=@state.name%>/posts" method="post">
-            <h5>Creating a New Post for <%=@state.name.capitalize%></h5>
+        <form action="/categories/<%=@category.title%>/posts" method="post">
+            <h5>Creating a New Post for <%=@category.title.capitalize%></h5>
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" name="title" placeholder="The Spiciest Salsa Ever...">

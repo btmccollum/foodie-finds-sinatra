@@ -2,10 +2,10 @@
 <div class="container-fluid category-title">
   <div class="row">
   <div class="col-6">
-    <h5>Welcome to <%= @state.name.capitalize%>!</h5>
+    <h5>Welcome to <%= @category.title.capitalize%>!</h5>
     </div>
     <div class=col-6 mr-2">
-    <form> <input type="submit" class="postbutton" value="New Post"> </form>
+    <form action="/categories/<%= @category.title %>/posts/new"> <input type="submit" class="postbutton" value="New Post"> </form>
     </div>
 
     </div>
@@ -29,7 +29,7 @@
               
             <div class="col-9 post-info pull-left">
                 <div class="post-title">
-                  <section><a href="/categories/<%= @state.name %>/posts/<%=post.id%>"><%= @state.name.capitalize %> / <%= post.title %></a></section>
+                  <section><a href="/categories/<%= @category.title %>/posts/<%=post.id%>"><%= post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= post.title %></a></section>
                   <section><%=post.location%></section>
                 </div>
                 <p><%=post.content%></p>    

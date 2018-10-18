@@ -1,8 +1,8 @@
 class CategoryController < ApplicationController
 
-    get '/categories/:state' do
+    get '/categories/:category' do
         binding.pry
-        @state = State.find_by(name: params[:state])
+        @catergory = Category.find_by(title: params[:category])
         
         erb :'/categories/show'
     end

@@ -15,7 +15,7 @@ class InitialSchema < ActiveRecord::Migration[5.2]
       t.string :content
       t.integer :score
       t.integer :user_id
-      t.integer :state_id
+      t.integer :category_id
       t.timestamps null:true
     end
 
@@ -29,11 +29,6 @@ class InitialSchema < ActiveRecord::Migration[5.2]
 
     create_table :categories do |t|
       t.string :title
-      t.timestamps null:true
-    end
-
-    create_table :states do |t|
-      t.string :name
       t.timestamps null:true
     end
   end

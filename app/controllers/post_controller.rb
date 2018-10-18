@@ -1,38 +1,38 @@
 class PostController < ApplicationController
 
-    get '/categories/:state/posts/new' do
-        @state = State.find_by(name: params[:state])
+    get '/categories/:category/posts/new' do
+        @category = Category.find_by(title: params[:category])
 
         erb :'/posts/new'
     end
     
-    get '/categories/:state/posts/:id' do
-        @state = State.find_by(name: params[:state])
+    get '/categories/:category/posts/:id' do
+        @category = Category.find_by(title: params[:category])
         @post = Post.find(params[:id])
         @comments = Comment.where(post_id: @post.id)
 
         erb :'/posts/show'
     end
 
-    get '/categories/:state/posts' do
-        @state = State.find_by(name: params[:state])
-        @posts = Post.where(state_id: @state.id)
+    get '/categories/:category/posts' do
+        @category = Category.find_by(title: params[:category])
+        @posts = Post.where(category: @category.id)
         
         erb :'/categories/show'
     end
 
-    post '/categories/:state/posts' do 
-        @state = State.find_by(name: params[:state])
+    post '/categories/:category/posts' do 
+        @category = Category.find_by(title: params[:category])
         @post = Post.new(title: params[:title], city: params[:city], location: params[:location], content: params[:content], score: 0)
-        @post.state_id = @state.id
+        @post.category_id = @category.id
         @post.user_id = current_user.id
         @post.save
 
-        redirect :"/categories/#{@state.name}/posts/#{@post.id}"
+        redirect :"/categories/#{@category.title}/posts/#{@post.id}"
     end
 
 
-    # patch '/categories/:state/posts/:id' do
-    #     @state = State.find_by(params[:state])
+    # patch '/categories/:category/posts/:id' do
+    #     @category = Category.find_by(params[:category])
     # end
 end
