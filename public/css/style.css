@@ -190,10 +190,19 @@ div.container-fluid.category-title .postbutton {
     float: right;
     border-radius: 5px;
     background-color: white;
-    margin-bottom: 5px;
+    margin-top: 10px;
     font-family: BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    color: rgba(6, 30, 58, 0.685);
 }
 
 div.container.top-post {
     margin-top: 20px;
+}
+
+ol.breadcrumb {
+    background-color: #565252;
+}
+
+ol.breadcrumb a {
+    color: #B5EDF7;
 }
