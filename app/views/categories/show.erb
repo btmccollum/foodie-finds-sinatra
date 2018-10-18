@@ -1,6 +1,14 @@
 
 <div class="container-fluid category-title">
+  <div class="row">
+  <div class="col-6">
     <h5>Welcome to <%= @state.name.capitalize%>!</h5>
+    </div>
+    <div class=col-6 mr-2">
+    <form> <input type="submit" class="postbutton" value="New Post"> </form>
+    </div>
+
+    </div>
 </div>
 
 <% @posts.each do |post| %>
