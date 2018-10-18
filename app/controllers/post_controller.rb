@@ -9,6 +9,7 @@ class PostController < ApplicationController
     get '/categories/:state/posts/:id' do
         @state = State.find_by(name: params[:state])
         @post = Post.find(params[:id])
+        @comments = Comment.where(post_id: @post.id)
 
         erb :'/posts/show'
     end

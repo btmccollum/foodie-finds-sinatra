@@ -14,14 +14,6 @@ ActiveRecord::Schema.define(version: 2018_10_16_201430) do
 
   create_table "categories", force: :cascade do |t|
     t.string "title"
-    t.integer "city_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "cities", force: :cascade do |t|
-    t.string "name"
-    t.integer "state_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -29,6 +21,7 @@ ActiveRecord::Schema.define(version: 2018_10_16_201430) do
   create_table "comments", force: :cascade do |t|
     t.string "content"
     t.integer "score"
+    t.integer "post_id"
     t.integer "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -36,9 +29,12 @@ ActiveRecord::Schema.define(version: 2018_10_16_201430) do
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
+    t.string "city"
+    t.string "location"
     t.string "content"
+    t.integer "score"
     t.integer "user_id"
-    t.string "city_id"
+    t.integer "state_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
