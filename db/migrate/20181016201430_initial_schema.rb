@@ -10,6 +10,7 @@ class InitialSchema < ActiveRecord::Migration[5.2]
     
     create_table :posts do |t|
       t.string :title
+      t.string :city
       t.string :location
       t.string :content
       t.integer :score

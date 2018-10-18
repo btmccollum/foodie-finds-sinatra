@@ -20,7 +20,10 @@
             </div>
               
             <div class="col-9 post-info pull-left">
-                <div class="post-title"><%= @state.name.capitalize %> / <%= post.title %></div>
+                <div class="post-title">
+                  <section><%= @state.name.capitalize %> / <%= post.title %></section>
+                  <section><%=post.location%></section>
+                </div>
                 <p><%=post.content%></p>    
                 <section class="replies-count">Replies: <%=post.comments.count%></section>
                 <section class="post-footer">Posted at <%= post.created_at %></section>

@@ -19,7 +19,7 @@
       <div class="card" style="width: 18rem;">
       <ul class="list-group list-group-flush d-flex justify-content-between align-items-center">
         <% @states.each do |state| %>
-          <li class="category-listing"><a href="/categories/<%=state.name%>" class=""><%=state.name.split(" ").map{|x| x.capitalize}.join(" ")%><span class="badge pull-right">#</span></a></li> 
+          <li class="category-listing"><a href="/categories/<%=state.name%>/posts" class=""><%=state.name.split(" ").map{|x| x.capitalize}.join(" ")%><span class="badge pull-right">#</span></a></li> 
         <% end %>
       </ul>
     </div>

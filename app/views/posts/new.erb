@@ -1,0 +1,29 @@
+
+<div class="container new-post">
+    <div class="row">
+        <form action="/categories/<%=@state.name%>/posts" method="post">
+            <h5>Creating a New Post for <%=@state.name.capitalize%></h5>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" name="title" placeholder="The Spiciest Salsa Ever...">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlInput1">City</label>
+                <input type="text" class="form-control" name="city" placeholder="Chicago...">
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" name="location" placeholder="ABC Restaurant...">
+            </div>
+
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" name="content" rows="3" placeholder="Tell us about what you found..."></textarea>
+            </div>
+
+            <input type="submit" class="btn btn-primary">
+        </form>
+    </div> <!-- close .row -->
+</div> <!-- close .container -->

@@ -147,11 +147,16 @@ body {
 .post .post-info section.replies-count {
     color: rgba(6, 30, 58, 0.685);
     font-weight: bold;
+    line-height: 10px;
 }
 
 .post .post-info section.post-footer {
     font-style: italic;
     font-size: .75em;
+    border-top: solid 1px #f1f1f1;
+    margin-top: 10px;
+    padding-top: 10px;
+    line-height: 15px;
 }
 
 .avatar {
