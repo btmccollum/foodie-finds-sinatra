@@ -10,12 +10,16 @@ body {
     background: rgba(75, 71, 71, 0.37);
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .top-of-page {
     background: rgba(75, 71, 71, 0.897);
 }
 .navbar-light .navbar-brand {
     font-family: 'Bungee', cursive;
-    color: rgb(170, 218, 226);
+    color: rgb(181, 237, 247);
     font-size:1.5em;
 }
 
@@ -103,3 +107,33 @@ body {
     font-weight: bold;
     font-style: italic;
 }
+
+.category-listing {
+    list-style: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+    line-height: 30px;
+}
+
+.post {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px black;
+    margin-bottom: 20px;
+}
+
+.post .user-info {
+    width: 10%;
+    padding: 15px 0 15px 15px;
+}
+.post .post-info {
+    width: 85%;
+    padding-right: 30px;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    color: #989c9e;
+    font-size: 14px;
+    line-height: 25px;
+}
+
