@@ -5,6 +5,13 @@ class PostController < ApplicationController
 
         erb :'/posts/new'
     end
+    
+    get '/categories/:state/posts/:id' do
+        @state = State.find_by(name: params[:state])
+        @post = Post.find(params[:id])
+
+        erb :'/posts/show'
+    end
 
     get '/categories/:state/posts' do
         @state = State.find_by(name: params[:state])
@@ -15,12 +22,12 @@ class PostController < ApplicationController
 
     post '/categories/:state/posts' do 
         @state = State.find_by(name: params[:state])
-        @post = Post.new(title: params[:title], city: params[:city], location: params[:location], content: params[:content])
+        @post = Post.new(title: params[:title], city: params[:city], location: params[:location], content: params[:content], score: 0)
         @post.state_id = @state.id
         @post.user_id = current_user.id
         @post.save
 
-        redirect :"/categories/#{@state.name}/posts/:id"
+        redirect :"/categories/#{@state.name}/posts/#{@post.id}"
     end
 
 

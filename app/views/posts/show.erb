@@ -1,1 +1,28 @@
-TEST
+<div class="container post">
+    <div class="row">
+        <div class="col-3 user-info pull-left align-self-center">
+            <div class="avatar">
+                <img src="../images/no-photo.png" class="align-self-center mr-2">
+                <p><%= (User.find(@post.user_id)).username %></p>
+                <form><input type="button" value="+1" class="like-button align-self-center mr-2"> <%= @post.score %></form>
+            </div>
+        </div>
+        
+        <div class="col-9 post-info pull-left">
+            <div class="post-title">
+                <section><%= @post.city.capitalize %> / <%= @post.title %></section>
+                <section><%= @post.location %></section>
+            </div>
+            <p><%= @post.content %></p>    
+            <section class="replies-count">Replies: <%= @post.comments.count %></section>
+            <section class="post-footer">Posted at <%= @post.created_at %></section>
+        </div>
+        
+        <div class="postbottom">
+
+            <div class="clearfix">
+            
+            </div>
+        </div>
+    </div> <!-- close .row -->
+</div> <!-- close .container.post -->
