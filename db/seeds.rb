@@ -4,46 +4,40 @@ User.create(username: "test03", password: "12345", email: "test3@test.com")
 User.create(username: "test04", password: "12345", email: "test4@test.com")
 User.create(username: "test05", password: "12345", email: "test5@test.com")
 
-tx = State.new(name: "Texas")
-tx.save
-dallas = City.create(name: "Dallas")
-dallas.update(:state_id => 1)
-ftw = City.create(name: "Fort Worth")
-ftw.update(:state_id => 1)
+states = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','D.C.','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming']
+
+states.each do |state|
+    new_state = State.new(name: "#{state.downcase}")
+    new_state.save
+end
 
 posts_list = {
     1 => {
         :title => "Found amazing cookies in the West End",
         :content => "If you love some unique cookies, you need to try these Strawberry Rhubarb sugar cookies at Joes!",
         :location => "Joe's Corner",
-        :city_id => 1,
         :score => 0
     },
     2 => {
         :title => "BEST.SUSHI.EVER.",
         :content => "Their spicy tuna rolls are AMAZING, try them next time you go.",
-        :location => "Central Market",
-        :city_id => 2
-    },
+        :location => "Central Market",    },
     3 => {
         :title => "Pepper X Salsa!",
         :content => "Central started carrying the Hot Ones last dab sauce!! A bit pricey at $20, but so hot!",
         :location => "Central Market",
-        :city_id => 2,
         :score => 0
     },
     4 => {
         :title => "Peking Duck Tacos",
         :content => "Just came across a street vendor selling peking duck tacos, they are simply amazing. They taste just like the peking duck I had in Beijing.",
         :location => "Corner of Knox and M Street",
-        :city_id => 1,
         :score => 0
     },
     2 => {
         :title => "Best Sushi 2.0",
         :content => "I know i just posted about Central's Sushi, but we went to PS for dinner and WOW! That California Roll was life changing.",
         :location => "Pacific Table",
-        :city_id => 2,
         :score => 0
     }
 }

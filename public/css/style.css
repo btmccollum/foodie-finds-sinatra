@@ -101,7 +101,7 @@ body {
 }
 
 .flashmessage{
-    color: white;
+    color: rgb(231, 135, 135);
     position: flex;
     text-align: center;
     font-weight: bold;
@@ -124,16 +124,35 @@ body {
 }
 
 .post .user-info {
-    width: 10%;
+    /* width: 10%; */
     padding: 15px 0 15px 15px;
+    
 }
 .post .post-info {
-    width: 85%;
+    width: 80%;
     padding-right: 30px;
     padding-top: 20px;
     padding-bottom: 15px;
     color: #989c9e;
     font-size: 14px;
     line-height: 25px;
+    float: right;
 }
 
+.avatar {
+    text-align: center;
+}
+
+.avatar img {
+    height: 30%; 
+    width: 30%;
+    border-radius: 50%;
+}
+
+.postbottom .clearfix {
+    clear: both;
+}
+
+.like-button {
+    border-radius: 5px;
+}

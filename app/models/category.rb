@@ -1,6 +1,5 @@
 class Category < ActiveRecord::Base
-    belongs_to :city
-    has_one :state, through: :city
+    belongs_to :state
     has_many :posts
     has_many :comments, through: :posts
 end

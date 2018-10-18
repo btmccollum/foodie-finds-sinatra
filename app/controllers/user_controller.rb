@@ -1,5 +1,6 @@
 class UserController < ApplicationController
     get '/users/signup' do
+        binding.pry
         erb :'/users/create_new'
     end
 
@@ -26,7 +27,6 @@ class UserController < ApplicationController
     end
 
     post '/users/login' do 
-        binding.pry
         @user = User.find_by(:username => params["username"])
 
         if @user && @user.authenticate(params["password"])
