@@ -14,6 +14,7 @@ class InitialSchema < ActiveRecord::Migration[5.2]
       t.string :content
       t.integer :score
       t.integer :user_id
+      t.integer :state_id
       t.timestamps null:true
     end
 

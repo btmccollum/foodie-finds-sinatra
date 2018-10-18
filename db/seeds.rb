@@ -16,29 +16,29 @@ posts_list = {
         :title => "Found amazing cookies in the West End",
         :content => "If you love some unique cookies, you need to try these Strawberry Rhubarb sugar cookies at Joes!",
         :location => "Joe's Corner",
-        :score => 0
+        :score => 0,
+        :state_id => 44
     },
-    2 => {
-        :title => "BEST.SUSHI.EVER.",
-        :content => "Their spicy tuna rolls are AMAZING, try them next time you go.",
-        :location => "Central Market",    },
     3 => {
         :title => "Pepper X Salsa!",
         :content => "Central started carrying the Hot Ones last dab sauce!! A bit pricey at $20, but so hot!",
         :location => "Central Market",
-        :score => 0
+        :score => 0,
+        :state_id => 44
     },
     4 => {
         :title => "Peking Duck Tacos",
         :content => "Just came across a street vendor selling peking duck tacos, they are simply amazing. They taste just like the peking duck I had in Beijing.",
         :location => "Corner of Knox and M Street",
-        :score => 0
+        :score => 0,
+        :state_id => 44
     },
     2 => {
         :title => "Best Sushi 2.0",
         :content => "I know i just posted about Central's Sushi, but we went to PS for dinner and WOW! That California Roll was life changing.",
         :location => "Pacific Table",
-        :score => 0
+        :score => 0,
+        :state_id => 44
     }
 }
 

@@ -139,6 +139,21 @@ body {
     float: right;
 }
 
+.post .post-info .post-title {
+    color: rgba(6, 30, 58, 0.685);
+    font-weight: bold;
+}
+
+.post .post-info section.replies-count {
+    color: rgba(6, 30, 58, 0.685);
+    font-weight: bold;
+}
+
+.post .post-info section.post-footer {
+    font-style: italic;
+    font-size: .75em;
+}
+
 .avatar {
     text-align: center;
 }
@@ -155,4 +170,14 @@ body {
 
 .like-button {
     border-radius: 5px;
+}
+
+
+
+div.container-fluid.category-title {
+    font-family: 'Bungee', cursive;
+    background-color: rgba(75, 71, 71, 0.897);
+    color: rgb(181, 237, 247);
+    font-weight: bold;
+    box-shadow: 0 1px 2px black;
 }

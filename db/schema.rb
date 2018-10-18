@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2018_10_16_201430) do
     t.string "content"
     t.integer "score"
     t.integer "user_id"
+    t.integer "state_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
