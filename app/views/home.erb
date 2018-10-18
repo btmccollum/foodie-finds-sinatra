@@ -18,56 +18,9 @@
       </div>
       <div class="card" style="width: 18rem;">
       <ul class="list-group list-group-flush d-flex justify-content-between align-items-center">
-                <li class="category-listing"><a href="#" class="">Alabama<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Alaska<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Arizona<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Arkansas<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">California<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Colorado<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Connecticut<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Delaware<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">D.C.<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Florida<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Hawaii<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Idaho<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Illinois<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Indiana<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Iowa<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Kansas<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Kentucky<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Louisiana<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Maine<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Maryland<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Massachusetts<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Michigan<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Minnesota<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Mississippi<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Missouri<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Montana<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Nebraska<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Nevada<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">New Hampshire<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">New Jerse<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">New Mexico<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">New York<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">North Carolina<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">North Dakota<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Ohio<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Oklahoma<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Oregon<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Pennsylvania<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Rhode Island<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">South Carolina<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">South Dakota<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Tennessee<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Texas<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Utah<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Vermont<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Virginia<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Washington<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">West Virginia<span class="badge pull-right">#</span></a></li>
-                <li class="category-listing"><a href="#" class="">Wisconsin<span class="badge pull-right">#</span></a></li>
-                
+        <% @states.each do |state| %>
+          <li class="category-listing"><a href="/categories/<%=state.name%>" class=""><%=state.name.split(" ").map{|x| x.capitalize}.join(" ")%><span class="badge pull-right">#</span></a></li> 
+        <% end %>
       </ul>
     </div>
     

@@ -13,6 +13,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
+    @states = State.all
+   
     erb :home
   end
 
