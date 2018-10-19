@@ -101,7 +101,7 @@ body {
 }
 
 .flashmessage{
-    color: rgb(231, 135, 135);
+    color: white;
     position: flex;
     text-align: center;
     font-weight: bold;

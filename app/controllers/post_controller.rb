@@ -1,9 +1,14 @@
 class PostController < ApplicationController
 
     get '/categories/:category/posts/new' do
-        @category = Category.find_by(title: params[:category])
+        if logged_in
+            @category = Category.find_by(title: params[:category])
 
-        erb :'/posts/new'
+            erb :'/posts/new'
+        else 
+            flash[:message] = "You must be logged in to create a post." 
+            redirect '/users/login'
+        end
     end
     
     get '/categories/:category/posts/:id' do
@@ -22,13 +27,19 @@ class PostController < ApplicationController
     end
 
     post '/categories/:category/posts' do 
-        @category = Category.find_by(title: params[:category])
-        @post = Post.new(title: params[:title], city: params[:city], location: params[:location], content: params[:content], score: 0)
-        @post.category_id = @category.id
-        @post.user_id = current_user.id
-        @post.save
+        binding.pry
+        if !params.any?{|key, value| value == ""}
+            @category = Category.find_by(title: params[:category])
+            @post = Post.new(title: params[:title], city: params[:city], location: params[:location], content: params[:content], score: 0)
+            @post.category_id = @category.id
+            @post.user_id = current_user.id
+            @post.save
 
-        redirect :"/categories/#{@category.title}/posts/#{@post.id}"
+            redirect :"/categories/#{@category.title}/posts/#{@post.id}"
+        else 
+            flash[:message] = "All fields required" 
+            redirect '/categories/:category/posts/new'
+        end
     end
 
 
