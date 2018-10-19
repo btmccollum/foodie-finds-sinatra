@@ -1,14 +1,15 @@
 class CommentController < ApplicationController
     get '/categories/:category/posts/:id/comments/:comment_id/edit' do
+        @category = Category.find_by(title: params[:category])
+        @post = Post.find(params[:id])
+        
         if logged_in && is_comment_owner(params)
-            @category = Category.find_by(title: params[:category])
-            @post = Post.find(params[:id])
             @comment = Comment.find(params[:comment_id])
            
             erb :'/comments/edit'
         else
             flash[:message] = "You cannot edit a comment you did not create." 
-            redirect '/'
+            redirect "/categories/#{@category.title}/posts/#{@post.id}"
         end
     end
 
@@ -58,7 +59,21 @@ class CommentController < ApplicationController
             redirect "/categories/#{@category.title}/posts/#{@post.id}"
         else
             flash[:message] = "You cannot edit a post you did not create." 
-            redirect '/'
+            redirect "/categories/#{@category.title}/posts/#{@post.id}"
+        end
+    end
+
+    delete '/categories/:category/posts/:id/comments/:comment_id/delete' do
+        @category = Category.find_by(title: params[:category])
+        @post = Post.find(params[:id])
+
+        if logged_in && is_comment_owner(params)
+            @comment = Comment.find(params[:comment_id])
+            @comment.destroy
+            redirect "/categories/#{@category.title}/posts/#{@post.id}"
+        else
+            flash[:message] = "You cannot delete a comment you did not create." 
+            redirect "/categories/#{@category.title}/posts/#{@post.id}"
         end
     end
 end

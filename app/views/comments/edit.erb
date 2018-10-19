@@ -59,7 +59,7 @@ Original Comment:
     </div> <!-- close .container -->
 </form>
 
-<form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/delete" method="post">
+<form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/<%= @comment.id %>/delete" method="post">
     <input id="hidden" type="hidden" name="_method" value="delete">
     <input type="submit" value="Delete">
 </form>

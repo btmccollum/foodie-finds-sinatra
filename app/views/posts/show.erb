@@ -44,6 +44,7 @@
                             <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/edit" method="get">
                                 <input type="submit" value="Edit">
                             </form>
+                        <% else %>
                             <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/new" method="get">
                                 <input type="submit" value="Reply">
                             </form>
@@ -80,7 +81,7 @@
                         <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/<%= comment.id %>/edit" method="get">
                             <input type="submit" value="Edit">
                         </form>
-                    <% elsif logged_in %>
+                    <% else %>
                         <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/new" method="get">
                             <input type="submit" value="Reply">
                         </form>
