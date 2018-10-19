@@ -1,6 +1,5 @@
 class UserController < ApplicationController
     get '/users/signup' do
-        binding.pry
         erb :'/users/create_new'
     end
 
@@ -9,8 +8,9 @@ class UserController < ApplicationController
     end
 
     post '/users/signup' do
+        binding.pry
         if !params.any?{|key, value| value == ""}
-            @user = User.new(:username => params["username"].downcase, :email => params["email"], :password => params["password"], :reputation => 0)
+            @user = User.new(:username => params["user"]["username"].downcase, :email => params["user"]["email"], :password => params["user"]["password"], :reputation => 0)
             if @user.save
                 session[:user_id] = @user.id
                 flash[:message] = "Account was successfully created."

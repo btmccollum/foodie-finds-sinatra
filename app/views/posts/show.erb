@@ -32,7 +32,7 @@
                     
                     <div class="col-9 post-info pull-left">
                         <div class="post-title">
-                            <section><%= @post.city.capitalize %> / <%= @post.title %></section>
+                            <section><%= @post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= @post.title %></section>
                             <section><%= @post.location %></section>
                         </div>
                         <p><%= @post.content %></p>    
@@ -44,7 +44,9 @@
                             <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/edit" method="get">
                                 <input type="submit" value="Edit">
                             </form>
-                            <form><input type="submit" value="Delete"></form>
+                            <form>
+                                <input type="submit" value="Delete">
+                            </form>
                         <% end %>              
                     </div>
                 </div> <!-- close .row -->

@@ -39,12 +39,13 @@ class PostController < ApplicationController
     end
 
     post '/categories/:category/posts' do 
-        binding.pry
-        if !params.any?{|key, value| value == ""}
+        if !params["post"].any? {|key, value| value == ""}
             @category = Category.find_by(title: params[:category])
-            @post = Post.new(title: params[:title], city: params[:city], location: params[:location], content: params[:content], score: 0)
+            
+            @post = Post.new(params["post"])
             @post.category_id = @category.id
             @post.user_id = current_user.id
+            @post.score = 0
             @post.save
 
             redirect :"/categories/#{@category.title}/posts/#{@post.id}"
@@ -60,8 +61,8 @@ class PostController < ApplicationController
 
         if logged_in && is_post_owner(params)
             @post = Post.find(params[:id])
-            params.each do |key, value|
-                if value != "" && key != "_method" && key != "category" && key != "id"
+            params["post"].each do |key, value|
+                if value != ""
                     @post.update(key => value)
                 else
                     next
