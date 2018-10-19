@@ -1,6 +1,4 @@
 class PostController < ApplicationController
-
-
     get '/categories/:category/posts/:id/edit' do
         if logged_in && is_post_owner(params)
             @category = Category.find_by(title: params[:category])
@@ -39,16 +37,16 @@ class PostController < ApplicationController
     end
 
     post '/categories/:category/posts' do 
+        @category = Category.find_by(title: params[:category])
+        
         if !params["post"].any? {|key, value| value == ""}
-            @category = Category.find_by(title: params[:category])
-            
             @post = Post.new(params["post"])
             @post.category_id = @category.id
             @post.user_id = current_user.id
             @post.score = 0
             @post.save
 
-            redirect :"/categories/#{@category.title}/posts/#{@post.id}"
+            redirect "/categories/#{@category.title}/posts/#{@post.id}"
         else 
             flash[:message] = "All fields required" 
             redirect '/categories/:category/posts/new'
@@ -72,6 +70,19 @@ class PostController < ApplicationController
         else
             flash[:message] = "You cannot edit a post you did not create." 
             redirect '/'
+        end
+    end
+
+    delete '/categories/:category/posts/:id/delete' do
+        @category = Category.find_by(title: params[:category])
+
+        if logged_in && is_post_owner(params)
+            @post = Post.find(params[:id])
+            @post.destroy
+            redirect "/categories/#{@category.title}/posts"
+        else
+            flash[:message] = "You cannot delete a post you did not create." 
+            redirect "/categories/#{@category.title}/posts"
         end
     end
 end
