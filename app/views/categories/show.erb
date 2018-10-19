@@ -35,7 +35,7 @@
               
             <div class="col-9 post-info pull-left">
                 <div class="post-title">
-                  <section><a href="/categories/<%= @category.title %>/posts/<%=post.id%>"><%= post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= post.title %></a></section>
+                  <section><a href="/categories/<%= @category.title %>/posts/<%= post.id %>"><%= post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= post.title %></a></section>
                   <section><%=post.location%></section>
                 </div>
                 <p><%=post.content%></p>    

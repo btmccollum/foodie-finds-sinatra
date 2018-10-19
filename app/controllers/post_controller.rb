@@ -30,8 +30,9 @@ class PostController < ApplicationController
     end
 
     get '/categories/:category/posts' do
+        binding.pry
         @category = Category.find_by(title: params[:category])
-        @posts = Post.where(category: @category.id)
+        @posts = Post.where(category_id: @category.id)
         
         erb :'/categories/show'
     end
@@ -82,7 +83,7 @@ class PostController < ApplicationController
             redirect "/categories/#{@category.title}/posts"
         else
             flash[:message] = "You cannot delete a post you did not create." 
-            redirect "/categories/#{@category.title}/posts"
+            redirect '/categories/#{@category.title}/posts'
         end
     end
 end

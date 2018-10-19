@@ -49,11 +49,11 @@
 
 <div class="container">
     <div class="row">
-        <form action="/categories/<%=@category.title%>/posts/<%= @post.id %>" method="post">
+        <form action="/categories/<%=@category.title%>/posts/<%= @post.id %>/comments" method="post">
 
             <div class="form-group">
                 <label for="content">Create a Reply:</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" name="post[content]" rows="3" placeholder="Tell us about what you found..."></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" name="comment[content]" rows="3" placeholder="Tell us about what you found..."></textarea>
             </div>
 
             <input type="submit" class="btn btn-primary">
