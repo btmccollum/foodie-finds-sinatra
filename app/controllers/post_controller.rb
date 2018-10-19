@@ -1,5 +1,17 @@
 class PostController < ApplicationController
 
+
+    get '/categories/:category/posts/:id/edit' do
+        if logged_in && is_post_owner(params)
+            @category = Category.find_by(title: params[:category])
+            @post = Post.find(params[:id])
+            erb :'/posts/edit'
+        else
+            flash[:message] = "You cannot edit a post you did not create." 
+            redirect '/'
+        end
+    end
+
     get '/categories/:category/posts/new' do
         if logged_in
             @category = Category.find_by(title: params[:category])
@@ -43,7 +55,22 @@ class PostController < ApplicationController
     end
 
 
-    # patch '/categories/:category/posts/:id' do
-    #     @category = Category.find_by(params[:category])
-    # end
+    patch '/categories/:category/posts/:id' do
+        @category = Category.find_by(title: params[:category])
+
+        if logged_in && is_post_owner(params)
+            @post = Post.find(params[:id])
+            params.each do |key, value|
+                if value != "" && key != "_method" && key != "category" && key != "id"
+                    @post.update(key => value)
+                else
+                    next
+                end
+            end
+            redirect "/categories/#{@category.title}/posts/#{@post.id}"
+        else
+            flash[:message] = "You cannot edit a post you did not create." 
+            redirect '/'
+        end
+    end
 end

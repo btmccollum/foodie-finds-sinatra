@@ -25,6 +25,12 @@ class ApplicationController < Sinatra::Base
       end
     end
 
+    def is_post_owner(params)
+      @post = Post.find(params[:id])
+      @post.user_id == current_user.id ? true : false
+    end
+
+
     def logged_in
       !!current_user
     end

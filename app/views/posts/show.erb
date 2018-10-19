@@ -40,10 +40,12 @@
                     </div>
                     
                     <div class="postbottom">
-
-                        <div class="clearfix">
-                        
-                        </div>
+                        <% if logged_in && @post.user_id == current_user.id %>
+                            <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/edit" method="get">
+                                <input type="submit" value="Edit">
+                            </form>
+                            <form><input type="submit" value="Delete"></form>
+                        <% end %>              
                     </div>
                 </div> <!-- close .row -->
             </div> <!-- close .container -->
