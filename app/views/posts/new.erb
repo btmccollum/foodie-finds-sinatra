@@ -1,3 +1,21 @@
+<div class="container-fluid category-title">
+  <div class="row">
+    <div class ="col-8">
+      <nav aria-label="breadcrumb customnav">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/categories/<%= @category.title %>/posts"><%= @category.title.capitalize %></a></li>
+      </ol>
+      </nav>
+    </div>
+
+    <div class=col-4 ml-1">
+      <form action="/categories/<%= @category.title %>/posts/new"> <input type="submit" class="postbutton" value="New Post"> </form>
+    </div>
+  </div>
+</div>
+
+
 <section class="flashmessage"><%= flash[:message] %></section>
 
 <div class="container new-post">

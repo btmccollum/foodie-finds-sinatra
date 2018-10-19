@@ -44,6 +44,9 @@
                             <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/edit" method="get">
                                 <input type="submit" value="Edit">
                             </form>
+                            <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/new" method="get">
+                                <input type="submit" value="Reply">
+                            </form>
                         <% end %>              
                     </div>
                 </div> <!-- close .row -->
@@ -73,10 +76,15 @@
                 </div>
                 
                 <div class="postbottom">
-                
-                    <div class="clearfix">
-                    
-                    </div>
+                    <% if logged_in && comment.user_id == current_user.id %>
+                        <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/<%= comment.id %>/edit" method="get">
+                            <input type="submit" value="Edit">
+                        </form>
+                    <% elsif logged_in %>
+                        <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/new" method="get">
+                            <input type="submit" value="Reply">
+                        </form>
+                    <% end %>  
                 </div>
             </div> <!-- close .row -->
             </div> <!-- close .post -->

@@ -1,0 +1,62 @@
+<div class="container-fluid category-title">
+  <div class="row">
+    <div class ="col-8">
+      <nav aria-label="breadcrumb customnav">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/categories/<%= @category.title %>/posts"><%= @category.title.capitalize %></a></li>
+      </ol>
+      </nav>
+    </div>
+
+    <div class=col-4 ml-1">
+      <form action="/categories/<%= @category.title %>/posts/new"> <input type="submit" class="postbutton" value="New Post"> </form>
+    </div>
+  </div>
+</div>
+
+<section class="flashmessage"><%= flash[:message] %></section>
+
+<div class= "container top-post">
+    <div class= "row">
+        <div class="col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
+            <div class="container post">
+                <div class="row">
+                    <div class="col-3 user-info pull-left align-self-center">
+                        <div class="avatar">
+                            <img src="../images/no-photo.png" class="align-self-center mr-2">
+                            <p><%= (User.find(@post.user_id)).username %></p>
+                            <form><input type="button" value="+1" class="like-button align-self-center mr-2"> <%= @post.score %></form>
+                        </div>
+                    </div>
+                    
+                    <div class="col-9 post-info pull-left">
+                        <div class="post-title">
+                            <section><%= @post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= @post.title %></section>
+                            <section><%= @post.location %></section>
+                        </div>
+                        <p><%= @post.content %></p>    
+                        <section class="post-footer">Posted at <%= @post.created_at %></section>
+                    </div>
+                    
+                    <div class="postbottom">            
+                    </div>
+                </div> <!-- close .row -->
+            </div> <!-- close .container -->
+        </div> 
+    </div> <!-- close .row -->
+</div> <!-- close .container -->
+
+<div class="container">
+    <div class="row">
+        <form action="/categories/<%=@category.title%>/posts/<%= @post.id %>" method="post">
+
+            <div class="form-group">
+                <label for="content">Create a Reply:</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" name="post[content]" rows="3" placeholder="Tell us about what you found..."></textarea>
+            </div>
+
+            <input type="submit" class="btn btn-primary">
+        </form>
+    </div> <!-- close .row -->
+</div> <!-- close .container -->
