@@ -1,0 +1,27 @@
+<div class="container new-post">
+    <div class="row">
+        <form action="" method="post">
+            <h5>My Account Information:</h5>
+            <div class="form-group">
+                <label for="title">Username: </label>
+                <input type="text" class="form-control" name="user[username]" placeholder="<%= current_user.username %>">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Email</label>
+                <input type="text" class="form-control" name="user[email]" placeholder="<%= current_user.email %>"
+            </div>
+
+            In order to finalize changes, please confirm your password:
+
+            <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                        <input type="password" class="form-control" id="inputPassword3" name="user[password]" placeholder="Password">
+                        <div class="reminder">*Required</div>
+                    </div>
+            </div>
+            
+            <input type="submit" class="btn btn-primary">
+        </form>
+    </div> <!-- close .row -->
+</div> <!-- close .container -->

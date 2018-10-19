@@ -68,7 +68,7 @@ comments_list = {
     },
     3 => {
         :content => "I'll have to check those out, I've been looking for authentic peking duck, does it come with plum sauce??",
-        :post_id => 4,
+        :post_id => 3,
         :score => 2
     },
     4 => {

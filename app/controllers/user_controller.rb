@@ -7,6 +7,27 @@ class UserController < ApplicationController
         erb :'/users/login'
     end
 
+    get '/users/profile/:id/edit' do
+        if logged_in && current_user.id == params[:id].to_i
+            @user = current_user
+            erb :'/users/edit'
+        else
+            flash[:message] = "You cannot view someone else's account." 
+            redirect '/'
+        end
+    end
+
+    get '/users/profile/:id' do
+        if logged_in && session[:user_id] == current_user.id
+            @posts = Post.where(user_id: current_user.id)
+            @user = current_user
+            erb :'/users/show'
+        else
+            flash[:message] = "You must be logged in to access your profile." 
+            redirect '/users/login'
+        end
+    end
+
     post '/users/signup' do
         binding.pry
         if !params.any?{|key, value| value == ""}

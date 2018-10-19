@@ -1,0 +1,60 @@
+<div class="container new-post">
+    <div class="row">
+        <form action="/users/profile/<%= @user.id %>/edit" method="get">
+
+            <h5>My Account Information:</h5>
+            <div class="form-group">
+                Username: <%= current_user.username %>
+            </div>
+
+            <div class="form-group">
+                Email: <%= current_user.email %>
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Edit Profile Info">
+        </form>
+    </div> <!-- close .row -->
+</div> <!-- close .container -->
+
+
+<h5>My Posts</h5>
+<% @posts.each do |post| %>
+
+    <div class="container posting">
+      <div class="row">
+          <div class="col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2">
+    
+            <div class="post">
+              <div class="row">
+                <div class="col-3 user-info pull-left align-self-center">
+                    <div class="avatar">
+                      <img src="../images/no-photo.png" class="align-self-center mr-2">
+                      <p><%=(User.find(post.user_id)).username%></p>
+                      <form><input type="button" value="+1" class="like-button align-self-center mr-2"> <%=post.score%></form>
+                    </div>
+                </div>
+                  
+                <div class="col-9 post-info pull-left">
+                    <div class="post-title">
+                      <section><a href="/categories/<%= Category.find(post.category_id).title %>/posts/<%= post.id %>"><%= post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= post.title %></a></section>
+                      <section><%=post.location%></section>
+                    </div>
+                    <p><%=post.content%></p>    
+                    <section class="replies-count">Replies: <%=post.comments.count%></section>
+                    <section class="post-footer">Posted at <%= post.created_at %></section>
+                </div>
+                  
+                <div class="postbottom">
+                
+                    <div class="clearfix">
+                    
+                    </div>
+                </div>
+              </div> <!-- close .row -->
+            </div> <!-- close .post -->
+    
+         </div> <!-- close .col-sm -->
+      </div> <!-- close .row -->
+    </div> <!-- close.container-posting -->
+    
+<% end %>
