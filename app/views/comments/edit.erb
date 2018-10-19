@@ -1,0 +1,65 @@
+<div class="container-fluid category-title">
+  <div class="row">
+    <div class ="col-8">
+      <nav aria-label="breadcrumb customnav">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/categories/<%= @category.title %>/posts"><%= @category.title.capitalize %></a></li>
+      </ol>
+      </nav>
+    </div>
+
+    <div class=col-4 ml-1">
+      <form action="/categories/<%= @category.title %>/posts/new"> <input type="submit" class="postbutton" value="New Post"> </form>
+    </div>
+  </div>
+</div>
+
+<section class="flashmessage"><%= flash[:message] %></section>
+
+Original Comment:
+
+<div class="container comments">
+    <div class="row">
+        <div class="col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2">
+            <div class="post">
+            <div class="row">
+                <div class="col-3 user-info pull-left align-self-center">
+                    <div class="avatar">
+                    <img src="../images/no-photo.png" class="align-self-center mr-2">
+                    <p><%=(User.find(@comment.user_id)).username%></p>
+                    <form><input type="button" value="+1" class="like-button align-self-center mr-2"> <%=@comment.score%></form>
+                    </div>
+                </div>
+                
+                <div class="col-9 post-info pull-left">
+                    <p><%=@comment.content%></p>    
+                    <section class="post-footer">Posted at <%= @comment.created_at %></section>
+                </div>
+    
+                <div class="postbottom"></div>
+            </div> <!-- close .row -->
+        </div> <!-- close .post -->
+        </div> <!-- close .col-sm -->
+    </div> <!-- close .row -->
+</div> <!-- close.container-posting -->
+
+<form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/<%= @comment.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+        <div class="container new-comment">
+
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="comment[content]" rows="3" placeholder="<%= @comment.content %>"></textarea>
+                </div>
+
+                <input type="submit" class="btn btn-primary">
+            </form>
+       
+    </div> <!-- close .container -->
+</form>
+
+<form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/delete" method="post">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete">
+</form>

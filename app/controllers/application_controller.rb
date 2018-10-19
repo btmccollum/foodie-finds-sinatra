@@ -30,6 +30,10 @@ class ApplicationController < Sinatra::Base
       @post.user_id == current_user.id ? true : false
     end
 
+    def is_comment_owner(params)
+      @comment = Comment.find(params[:comment_id])
+      @comment.user_id == current_user.id ? true : false
+    end
 
     def logged_in
       !!current_user
