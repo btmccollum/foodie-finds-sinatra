@@ -290,3 +290,7 @@ div.row.new-comment {
     width: 66.66666667%;
 }
 
+footer.branding {
+    position: relative;
+    padding-left: 10px;
+}
