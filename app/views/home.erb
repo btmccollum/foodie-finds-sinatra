@@ -40,7 +40,7 @@
                                         
                                 <div class="post-info pull-left">
                                     <div class="post-title post-info pull-left">
-                                        <p><span><%= (User.find(post.user_id)).username %></span>: <a href="/categories/<%= Category.find(post.category_id).title %>/posts/<%= post.id %>"><%= post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= post.title %></a></span></p>
+                                        <p><span><%= (User.find(post.user_id)).username %></span>: <a href="/categories/<%= Category.find(post.category_id).title %>/posts/<%= post.id %>"><%= Category.find(post.category_id).title.capitalize %> / <%= post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= post.title %></a></span></p>
                                         <span><%= post.location %></span>
                                     </div>
                                     <div class="post-info">
