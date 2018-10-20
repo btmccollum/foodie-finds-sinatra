@@ -41,17 +41,22 @@ class PostController < ApplicationController
     post '/categories/:category/posts' do 
         @category = Category.find_by(title: params[:category])
         
-        if !params["post"].any? {|key, value| value == ""}
-            @post = Post.new(params["post"])
-            @post.category_id = @category.id
-            @post.user_id = current_user.id
-            @post.score = 0
-            @post.save
+        if logged_in 
+            if !params["post"].any? {|key, value| value == ""}
+                @post = Post.new(params["post"])
+                @post.category_id = @category.id
+                @post.user_id = current_user.id
+                @post.score = 0
+                @post.save
 
-            redirect "/categories/#{@category.title}/posts/#{@post.id}"
-        else 
-            flash[:message] = "All fields required" 
-            redirect '/categories/:category/posts/new'
+                redirect "/categories/#{@category.title}/posts/#{@post.id}"
+            else 
+                flash[:message] = "All fields required" 
+                redirect '/categories/:category/posts/new'
+            end
+        else
+            flash[:message] = "Oops! Something went wrong." 
+            redirect '/categories/:category/posts/'
         end
     end
 
