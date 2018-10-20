@@ -29,13 +29,16 @@ class UserController < ApplicationController
     end
 
     post '/users/signup' do
-        if !!User.find_by(username: params["user"]["username"]) && !!User.find_by(email: params["user"]["email"]) 
+        name_dup_check = !!User.find_by(username: params["user"]["username"])
+        email_dup_check = !!User.find_by(email: params["user"]["email"]) 
+
+        if name_dup_check && email_dup_check
             flash[:message] = "This username and email have already been registered to an account." 
             redirect '/users/signup'
-        elsif !!User.find_by(username: params["user"]["username"]) && !!User.find_by(email: params["user"]["email"]) == false
+        elsif name_dup_check && !email_dup_check
             flash[:message] = "This username has already been taken, please choose another." 
             redirect '/users/signup'
-        elsif !!User.find_by(username: params["user"]["username"]) == false && !!User.find_by(email: params["user"]["email"])
+        elsif !name_dup_check && email_dup_check
             flash[:message] = "An account has already been registered to this email address." 
             redirect '/users/signup'
         elsif !params.any?{|key, value| value == ""}
