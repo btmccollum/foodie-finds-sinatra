@@ -29,9 +29,18 @@ class UserController < ApplicationController
     end
 
     post '/users/signup' do
-        binding.pry
-        if !params.any?{|key, value| value == ""}
+        if !!User.find_by(username: params["user"]["username"]) && !!User.find_by(email: params["user"]["email"]) 
+            flash[:message] = "This username and email have already been registered to an account." 
+            redirect '/users/signup'
+        elsif !!User.find_by(username: params["user"]["username"]) && !!User.find_by(email: params["user"]["email"]) == false
+            flash[:message] = "This username has already been taken, please choose another." 
+            redirect '/users/signup'
+        elsif !!User.find_by(username: params["user"]["username"]) == false && !!User.find_by(email: params["user"]["email"])
+            flash[:message] = "An account has already been registered to this email address." 
+            redirect '/users/signup'
+        elsif !params.any?{|key, value| value == ""}
             @user = User.new(:username => params["user"]["username"].downcase, :email => params["user"]["email"], :password => params["user"]["password"], :reputation => 0)
+
             if @user.save
                 session[:user_id] = @user.id
                 flash[:message] = "Account was successfully created."
