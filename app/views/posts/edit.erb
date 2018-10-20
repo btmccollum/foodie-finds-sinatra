@@ -89,6 +89,8 @@
                 </div> <!-- close .container -->
             </form>
 
+            <!-- DELETE BUTTON -->
+
             <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/delete" method="post">
                 <input id="hidden" type="hidden" name="_method" value="delete">
                 <input type="submit" class="btn btn-primary" id="comment-delete-button" value="Delete">

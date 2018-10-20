@@ -12,7 +12,7 @@ body {
 
 .top-of-page {
     background: rgba(75, 71, 71, 0.897);
-    height: 40px;
+    
     /* display: flex; */
 }
 
@@ -359,3 +359,10 @@ footer.branding {
     margin-left: 20px;
 }
 
+.edit-user-info {
+    margin-top: 15px;
+}
+
+#user-submit-button {
+    margin-top: 15px;
+}
