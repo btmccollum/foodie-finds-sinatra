@@ -148,18 +148,20 @@ body {
     font-weight: bold;
 }
 
-.post .post-info section.replies-count {
+.post .post-info span.replies-count {
     color: rgba(6, 30, 58, 0.685);
     font-weight: bold;
-    line-height: 10px;
 }
 
 .post .post-info.post-footer {
     font-style: italic;
     font-size: .75em;
-    border-top: solid 1px #f1f1f1;
     margin-top: 10px;
     padding-top: 10px;
+}
+
+.post .post-info .post-footer-section {
+    border-top: solid 1px #f1f1f1;
     line-height: 15px;
 }
 
@@ -209,6 +211,8 @@ body {
 
 .cbut {
     border-radius: 5px;
+    position: relative;
+    margin-top: 20px;
 }
 
 .avatar {
@@ -304,7 +308,7 @@ div.row.new-comment {
 }
 
 footer.branding {
-   position:absolute;
+   position:fixed;
    padding-left: 10px;
    left:0px;
    bottom:0px;
@@ -334,3 +338,4 @@ footer.branding {
     font-weight: bold;
     margin-left: 20px;
 }
+

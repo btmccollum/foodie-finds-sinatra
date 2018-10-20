@@ -38,20 +38,23 @@
                                     <span><%= @post.location %></span>
                                 </div>
                                 <div class="post-info">
-                                    <p><span><%= @post.content %></span></p>    
+                                        <p><span><%= @post.content %></span></p>    
+                                    </div>
+                                <div class="post-footer-section">
+                                    <span class="post-info replies-count">Replies: <%= @post.comments.count%></span>
+                                    <span class="post-info post-footer">Posted at <%= @post.created_at %></span>
                                 </div>
-                                <span class="post-footer">Posted at <%= @post.created_at %></span>
                             </div> <!-- close .post-info -->
                         </div> <!-- close .top-wrap -->
                                 
                         <div class="postbottom">
                                 <% if logged_in && @post.user_id == current_user.id %>
                                     <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/edit" method="get">
-                                        <input type="submit" class="cbut" value="Edit">
+                                        <input type="submit" class="cbut text-center" value="Edit">
                                     </form>
                                 <% else %>
                                     <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/new" method="get">
-                                        <input type="submit" class="cbut" value="Reply">
+                                        <input type="submit" class="cbut text-center" value="Reply">
                                     </form>
                                 <% end %>            
                         </div> <!-- close .postbottom -->
@@ -85,11 +88,11 @@
                                         <div class="commentbottom ">
                                             <% if logged_in && comment.user_id == current_user.id %>
                                                 <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/<%= comment.id %>/edit" method="get">
-                                                    <input type="submit" class="cbut" value="Edit">
+                                                    <input type="submit" class="cbut align-content-center" value="Edit">
                                                 </form>
                                             <% else %>
                                                 <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/new" method="get">
-                                                    <input type="submit" class="cbut" value="Reply">
+                                                    <input type="submit" class="cbut align-content-center" value="Reply">
                                                 </form>
                                             <% end %>  
                                         </div> <!-- close .commentbottom -->

@@ -44,8 +44,9 @@
                                     <div class="post-info">
                                         <p><span><%= post.content %></span></p>    
                                     </div>
-                                    <div>
-                                      <span class="post-info post-footer">Posted at <%= post.created_at %></span>
+                                    <div class="post-footer-section">
+                                        <span class="post-info replies-count">Replies: <%=post.comments.count%></span>
+                                        <span class="post-info post-footer">Posted at <%= post.created_at %></span>
                                     </div>
                                 </div> <!-- close .post-info -->
                             </div> <!-- close .top-wrap -->

@@ -25,47 +25,53 @@
     </div>
 </div>
 
-<% if @posts != [] %>
-    <% @posts.each do |post| %>
+<section class="content">
+        <div class= "container-fluid">
+            <div class= "row">
+                <div class="col-lg-12 col-md-12">
 
-        <div class="container posting">
-        <div class="row">
-            <div class="col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2">
-                <div class="post">
-                <div class="row">
-                    <div class="col-3 user-info pull-left align-self-center">
-                        <div class="avatar">
-                        <img src="../images/no-photo.png" class="align-self-center mr-2">
-                        <p><%=(User.find(post.user_id)).username%></p>
-                        <form><input type="button" value="+1" class="like-button align-self-center mr-2"> <%=post.score%></form>
-                        </div>
-                    </div>
-                    
-                    <div class="col-9 post-info pull-left">
-                        <div class="post-title">
-                        <section><a href="/categories/<%= Category.find(post.category_id).title %>/posts/<%= post.id %>"><%= post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= post.title %></a></section>
-                        <section><%=post.location%></section>
-                        </div>
-                        <p><%=post.content%></p>    
-                        <section class="replies-count">Replies: <%=post.comments.count%></section>
-                        <section class="post-footer">Posted at <%= post.created_at %></section>
-                    </div>
-                    
-                    <div class="postbottom">
-                        <div class="clearfix"></div>
-                    </div>
-                </div> <!-- close .row -->
-                </div> <!-- close .post -->
-            </div> <!-- close .col-sm -->
-        </div> <!-- close .row -->
-        </div> <!-- close.container-posting -->    
-    <% end %>
-<% else %>
+                <% if @posts != [] %>
+                    <% @posts.each do |post| %>
+                        <div class= "row">
+                            <div class="col-sm-10 offset-sm-1 col-lg-10 offset-lg-1 col-md-10 offset-md-1">
+                                <div class="post">
+                                    <div class="top-wrap">
+                                        <div class="user-info pull-left">
+                                            <div class="avatar">
+                                                <p><img src="../images/no-photo.png" class="align-self-center mr-2"></p>
+                                                <p class="text-center"><span class="position-relative align-content-center"><%= (User.find(post.user_id)).username %></span></p>
+                                                <p class="text-center"><form><input type="button" value="+1" class="like-button align-self-center mr-2 text-center"> <%= post.score %></form></p>
+                                            </div> <!-- close .avatar -->
+                                        </div> <!-- close .user-info -->
+                                                
+                                        <div class="post-info pull-left">
+                                            <div class="post-title post-info pull-left">
+                                                <p><span><a href="/categories/<%= Category.find(post.category_id).title %>/posts/<%= post.id %>"><%= post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= post.title %></a></span></p>
+                                                <span><%= post.location %></span>
+                                            </div>
+                                            <div class="post-info">
+                                                <p><span><%= post.content %></span></p>    
+                                            </div>
+                                            <div class="post-footer-section">
+                                                <span class="post-info replies-count">Replies: <%=post.comments.count%></span>
+                                                <span class="post-info post-footer">Posted at <%= post.created_at %></span>
+                                            </div>
+                                        </div> <!-- close .post-info -->
+                                    </div> <!-- close .top-wrap -->
+                                </div> <!-- close .post -->
+                            </div> <!-- close .col-lg-12 -->
+                        </div> <!-- close .row -->
+                    <% end %>
+                <% else %>
 
-<div class="container">
-    <div class="row">
-        <p> You haven't posted anything yet. <p>
+                <div class="container">
+                    <div class="row">
+                        <p> You haven't posted anything yet. <p>
+                    </div>
+                </div>
+
+                <% end %>
+            </div>
+        </div>
     </div>
-</div>
-
-<% end %>
+</section>
