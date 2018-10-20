@@ -157,6 +157,7 @@ body {
     margin-top: 10px;
     padding-top: 10px;
     line-height: 15px;
+    white-space:normal
 }
 
 .avatar {
