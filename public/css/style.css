@@ -12,7 +12,10 @@ body {
 
 .top-of-page {
     background: rgba(75, 71, 71, 0.897);
+    height: 40px;
+    /* display: flex; */
 }
+
 .navbar-light .navbar-brand {
     font-family: 'Bungee', cursive;
     color: rgb(181, 237, 247);
@@ -81,7 +84,7 @@ body {
     background-color: rgba(6, 30, 58, 0.685);
     padding-top: 20px;
     border: 1px solid white;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     color: white;
 }
 
@@ -97,7 +100,7 @@ body {
 }
 
 .flashmessage{
-    color: white;
+    color: #0069D9;
     position: flex;
     text-align: center;
     font-weight: bold;
@@ -241,11 +244,9 @@ div.container-fluid.category-title {
     color: rgb(181, 237, 247);
     font-weight: bold;
     box-shadow: 0 1px 2px black;
-    margin-bottom: 15px;
-    padding-left: 0px!important;
-    padding-right: 0px!important;
-    margin-left: 0!important;
-    margin-right: 0!important;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    height: 50px;
     width: 100%;
 }
 
@@ -293,12 +294,39 @@ div.row.new-comment {
     height: auto;
 }
 
-  @media (min-width: 992px)
+@media (min-width: 992px)
 .col-md-8 {
     width: 66.66666667%;
 }
 
 footer.branding {
-    position: static;
-    padding-left: 10px;
+   position:sticky;
+   padding-left: 10px;
+   left:0px;
+   bottom:0px;
+   width:100%;
+   font-size: .5em;
+   color: #BCBBBB;
+   background:#565252;
+}
+
+#comment-reply-button {
+    margin-top: 10px;
+    margin-left: 20px;
+    float: left;
+}
+
+#comment-delete-button {
+    position: relative;
+    margin-top: 10px;
+    margin-right: 20px;
+    float: right;
+    background-color: red;
+    border-color: red;
+}
+
+#comment-label {
+    color: #546578;
+    font-weight: bold;
+    margin-left: 20px;
 }

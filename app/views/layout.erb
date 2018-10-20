@@ -28,7 +28,7 @@
             <!-- account links -->
             <% if logged_in %>
               <ul class="nav navbar-nav ml-auto w-100 justify-content-end">   
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown dropmenu">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <%= current_user.username %>
                   </a>
@@ -61,11 +61,11 @@
         <%= yield %>
 
   
-    </div>
-
     <footer class="branding fixed-bottom">
-        <small>&copy; 2018 <strong>FoodieFinds</strong></small>
+      <small>&copy; 2018 <strong>FoodieFinds</strong></small>
     </footer>
+
+    </div>
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
