@@ -16,12 +16,6 @@
       <div class="content">
         <p>Welcome to Foodie Finds! Our goal is to provide an open forum for foodies nationwide in order bring awareness to the hidden culinary gems in your communities. To get started just pick the state you're interested in and pick the discussion board for a city. If you'd like to join the discussion, then you'll first need to create an account.</p>
       </div>
-      <div class="card" style="width: 18rem;">
-      <ul class="list-group list-group-flush d-flex justify-content-between align-items-center">
-        <% @categories.each do |category| %>
-          <li class="category-listing"><a href="/categories/<%=category.title%>/posts" class=""><%=category.title.split(" ").map{|word| word.capitalize}.join(" ")%><span class="badge pull-right">#</span></a></li> 
-        <% end %>
-      </ul>
     </div>
     
         
@@ -30,35 +24,58 @@
   </div> <!-- close .row -->
 </div> <!-- close .container -->
 </div>
-<div class="container posting">
-  <div class="row">
-      <div class="col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2">
-
-        <div class="post">
-          <div class="row">
-            <div class="col-3 user-info pull-left align-self-center">
-                <div class="avatar">
-                  <img src="../images/no-photo.png" class="align-self-center mr-2">
-                  <p>testname</p>
-                  <form><input type="button" value="+1" class="like-button align-self-center mr-2"> #</form>
-                </div>
-            </div>
-              
-            <div class="col-9 post-info pull-left">
-                <p>hello this si a bunch of random gibbersih for testingello this si a bunch of random gibbersih for testingello this si a bunch of random gibbersih for testingello this si a bunch of random gibbersih for testingello this si a bunch of random gibbersih for testing</p>    
-            </div>
-              
-            <div class="postbottom">
-            
-                <div class="clearfix">
-                
-                </div>
-            </div>
-          </div> <!-- close .row -->
-        </div> <!-- close .post -->
-
-     </div> <!-- close .col-sm -->
-  </div> <!-- close .row -->
-</div> <!-- close.container-posting -->
 
 
+
+<div class="container-fluid">
+    <section class="flashmessage"><%= flash[:message] %></section>
+
+    <section class="content">
+        <div class= "container-fluid">
+            <div class= "row">
+                <div class="col-lg-9 col-md-9">
+
+                  <% @posts.each do |post| %>
+                    
+                      <div class="col-lg-12 col-md-12">
+                        <div class="post">
+                            <div class="top-wrap">
+                                <div class="user-info pull-left">
+                                    <div class="avatar">
+                                        <p><img src="../images/no-photo.png" class="align-self-center mr-2"></p>
+                                        <p class="text-center"><span class="position-relative text-center"><%= (User.find(post.user_id)).username %></span></p>
+                                        <p class="text-center"><form><input type="button" value="+1" class="like-button align-self-center mr-2 text-center"> <%= post.score %></form></p>
+                                    </div> <!-- close .avatar -->
+                                </div> <!-- close .user-info -->
+                                        
+                                <div class="post-info pull-left">
+                                    <div class="post-title post-info pull-left">
+                                        <p><span><a href="/categories/<%= Category.find(post.category_id).title %>/posts/<%= post.id %>"><%= post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= post.title %></a></span></p>
+                                        <span><%= post.location %></span>
+                                    </div>
+                                    <div class="post-info">
+                                        <p><span><%= post.content %></span></p>    
+                                    </div>
+                                    <div>
+                                      <span class="post-info post-footer">Posted at <%= post.created_at %></span>
+                                    </div>
+                                </div> <!-- close .post-info -->
+                            </div> <!-- close .top-wrap -->
+                          </div> <!-- close .post -->
+                        </div> <!-- close .col-lg-12 -->
+                   
+                  <% end %>
+                </div>      
+                <div class="col-lg-3 col-md-3">
+                    <div class="card mx-auto cats-list" style="width: 10rem;">
+                        <ul class="list-group list-group-flush d-flex justify-content-between align-items-left align-content-center ml-3">
+                            <% @categories.each do |category| %>
+                                <li class="category-listing"><a href="/categories/<%=category.title%>/posts" class=""><%=category.title.split(" ").map{|word| word.capitalize}.join(" ")%><span class="badge pull-right">#</span></a></li> 
+                            <% end %>
+                        </ul>
+                    </div> <!-- close .card -->
+                </div> <!-- close .col-lg-4 -->
+            </div> <!-- close .row -->
+        </div> <!-- close .container -->
+    </section>
+</div>
