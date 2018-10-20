@@ -17,80 +17,89 @@
 
 <section class="flashmessage"><%= flash[:message] %></section>
 
-<div class= "container top-post">
-    <div class= "row">
-        <div class="col-sm-10 offset-sm-1 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
-            <div class="container post">
-                <div class="row">
-                    <div class="col-3 user-info pull-left align-self-center">
-                        <div class="avatar">
-                            <img src="../images/no-photo.png" class="align-self-center mr-2">
-                            <p><%= (User.find(@post.user_id)).username %></p>
-                            <form><input type="button" value="+1" class="like-button align-self-center mr-2"> <%= @post.score %></form>
-                        </div>
-                    </div>
-                    
-                    <div class="col-9 post-info pull-left">
-                        <div class="post-title">
-                            <section><%= @post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= @post.title %></section>
-                            <section><%= @post.location %></section>
-                        </div>
-                        <p><%= @post.content %></p>    
-                        <section class="post-footer">Posted at <%= @post.created_at %></section>
-                    </div>
-                    
+<section class="content">
+    <div class= "container-fluid">
+        <div class= "row">
+            <div class="col-lg-8 col-md-8">
+                <div class="post">
+                    <div class="top-wrap">
+                        <div class="user-info pull-left">
+                            <div class="avatar">
+                                <img src="../images/no-photo.png" class="align-self-center mr-2">
+                                <span><%= (User.find(@post.user_id)).username %></span>
+                                <form><input type="button" value="+1" class="like-button align-self-center mr-2"> <%= @post.score %></form>
+                            </div> <!-- close .avatar -->
+                        </div> <!-- close .user-info -->
+                                
+                        <div class="post-info pull-left">
+                            <div class="post-title post-info pull-left">
+                                <span><%= @post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= @post.title %></span>
+                                <span><%= @post.location %></span>
+                            </div>
+                            <span><%= @post.content %></span>    
+                            <span class="post-footer">Posted at <%= @post.created_at %></span>
+                        </div> <!-- close .post-info -->
+                    </div> <!-- close .top-wrap -->
+                            
                     <div class="postbottom">
-                        <% if logged_in && @post.user_id == current_user.id %>
-                            <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/edit" method="get">
-                                <input type="submit" value="Edit">
-                            </form>
-                        <% else %>
-                            <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/new" method="get">
-                                <input type="submit" value="Reply">
-                            </form>
-                        <% end %>              
-                    </div>
-                </div> <!-- close .row -->
-            </div> <!-- close .container -->
-        </div> 
-    </div> <!-- close .row -->
-</div> <!-- close .container -->
+                        <div class="row" id="button-row">
+                            <% if logged_in && @post.user_id == current_user.id %>
+                                <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/edit" method="get">
+                                    <input type="submit" value="Edit">
+                                </form>
+                            <% else %>
+                                <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/new" method="get">
+                                    <input type="submit" value="Reply">
+                                </form>
+                            <% end %>    
+                        </div> <!-- close .row -->          
+                    </div> <!-- close .postbottom -->
+                </div> <!-- close .post -->
+        
+                        
+                <% @comments.each do |comment| %>
+                    <div class="comment">  
+                        <div class="row">
+                            <div class="user-info pull-left align-self-center">
+                                <div class="avatar">
+                                    <img src="../images/no-photo.png" class="align-self-center mr-2">
+                                    <span><%=(User.find(comment.user_id)).username%></span>
+                                    <form><input type="button" value="+1" class="like-button align-self-center mr-2"> <%=comment.score%></form>
+                                </div> <!-- close .avatar -->
+                            </div> <!-- close .user-info -->
+                        
+                            <div class="comment-info pull-left">
+                                <span><%=comment.content%></span>    
+                                <span class="comment-footer">Posted at <%= comment.created_at %></span>
+                            </div> <!-- close .comment-info -->
+                        
+                            <div class="row">
+                            <div class="commentbottom">
+                                <% if logged_in && comment.user_id == current_user.id %>
+                                    <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/<%= comment.id %>/edit" method="get">
+                                        <input type="submit" value="Edit">
+                                    </form>
+                                <% else %>
+                                    <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/new" method="get">
+                                        <input type="submit" value="Reply">
+                                    </form>
+                                <% end %>  
+                            </div> <!-- close .commentbottom -->
+                            </div>
+                        </div> <!-- close .row -->
+                    </div> <!-- close .comments -->
+                <% end %>
+            </div> <!-- close .col-lg-8 -->
 
-<% @comments.each do |comment| %>
-    <div class="container comments">
-    <div class="row">
-        <div class="col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2">
-
-            <div class="post">
-            <div class="row">
-                <div class="col-3 user-info pull-left align-self-center">
-                    <div class="avatar">
-                    <img src="../images/no-photo.png" class="align-self-center mr-2">
-                    <p><%=(User.find(comment.user_id)).username%></p>
-                    <form><input type="button" value="+1" class="like-button align-self-center mr-2"> <%=comment.score%></form>
-                    </div>
-                </div>
-                
-                <div class="col-9 post-info pull-left">
-                    <p><%=comment.content%></p>    
-                    <section class="post-footer">Posted at <%= comment.created_at %></section>
-                </div>
-                
-                <div class="postbottom">
-                    <% if logged_in && comment.user_id == current_user.id %>
-                        <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/<%= comment.id %>/edit" method="get">
-                            <input type="submit" value="Edit">
-                        </form>
-                    <% else %>
-                        <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/new" method="get">
-                            <input type="submit" value="Reply">
-                        </form>
-                    <% end %>  
-                </div>
-            </div> <!-- close .row -->
-            </div> <!-- close .post -->
-
-        </div> <!-- close .col-sm -->
-    </div> <!-- close .row -->
-    </div> <!-- close.container-posting -->
-<% end %>
+            <div class="col-lg-4 col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <ul class="list-group list-group-flush d-flex justify-content-between align-items-center">
+                        <% @categories.each do |category| %>
+                            <li class="category-listing"><a href="/categories/<%=category.title%>/posts" class=""><%=category.title.split(" ").map{|word| word.capitalize}.join(" ")%><span class="badge pull-right">#</span></a></li> 
+                        <% end %>
+                    </ul>
+                </div> <!-- close .card -->
+            </div> <!-- close .col-lg-4 -->
+        </div> <!-- close .row -->
+    </div> <!-- close .container -->
+</section>

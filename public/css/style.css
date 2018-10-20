@@ -10,10 +10,6 @@ body {
     background: rgba(75, 71, 71, 0.37);
 }
 
-* {
-    box-sizing: border-box;
-}
-
 .top-of-page {
     background: rgba(75, 71, 71, 0.897);
 }
@@ -57,7 +53,7 @@ body {
 }
 
 .box1 {
-    background-color: rgba(75, 71, 71, 0.897)!important;
+    background-color: rgba(75, 71, 71, 0.897);
 }
 
 .scrollable-menu {
@@ -116,6 +112,10 @@ body {
     line-height: 30px;
 }
 
+.pull-left {
+    float: left!important;
+}
+
 .post {
     background-color: #ffffff;
     border-radius: 8px;
@@ -124,19 +124,18 @@ body {
 }
 
 .post .user-info {
-    /* width: 10%; */
+    width: 12%;
     padding: 15px 0 15px 15px;
-    
 }
+
 .post .post-info {
-    width: 80%;
+    width: 88%;
     padding-right: 30px;
     padding-top: 20px;
     padding-bottom: 15px;
     color: #989c9e;
     font-size: 14px;
     line-height: 25px;
-    float: right;
 }
 
 .post .post-info .post-title {
@@ -157,16 +156,55 @@ body {
     margin-top: 10px;
     padding-top: 10px;
     line-height: 15px;
-    white-space:normal
+}
+
+.comment {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px black;
+    margin-bottom: 20px;
+}
+
+.comment .user-info {
+    width: 15%;
+    padding: 15px 0 15px 15px;
+}
+
+.comment .comment-info {
+    width: 85%;
+    padding-right: 30px;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    color: #989c9e;
+    font-size: 14px;
+    line-height: 25px;
+}
+
+.comment .comment-info .comment-title {
+    color: rgba(6, 30, 58, 0.685);
+    font-weight: bold;
+}
+
+.comment .comment-info section.replies-count {
+    color: rgba(6, 30, 58, 0.685);
+    font-weight: bold;
+    line-height: 10px;
+}
+
+.comment .comment-info section.comment-footer {
+    font-style: italic;
+    font-size: .75em;
+    border-top: solid 1px #f1f1f1;
+    margin-top: 10px;
+    padding-top: 10px;
+    line-height: 15px;
 }
 
 .avatar {
-    text-align: center;
+    position: relative;
 }
 
 .avatar img {
-    height: 30%; 
-    width: 30%;
     border-radius: 50%;
 }
 
@@ -206,4 +244,16 @@ ol.breadcrumb {
 
 ol.breadcrumb a {
     color: #B5EDF7;
+}
+
+
+#button-rows{
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+  }
+
+  @media (min-width: 992px)
+.col-md-8 {
+    width: 66.66666667%;
 }
