@@ -1,3 +1,5 @@
+<section class="flashmessage"><%= flash[:message] %></section>
+
 <div class="container new-post">
     <div class="row">
         <form action="/users/profile/<%= @user.id %>/edit" method="get">

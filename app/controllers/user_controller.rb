@@ -1,12 +1,5 @@
 class UserController < ApplicationController
-    get '/users/signup' do
-        erb :'/users/create_new'
-    end
-
-    get '/users/login' do
-        erb :'/users/login'
-    end
-
+    
     get '/users/profile/:id/edit' do
         if logged_in && current_user.id == params[:id].to_i
             @user = current_user
@@ -26,6 +19,14 @@ class UserController < ApplicationController
             flash[:message] = "You must be logged in to access your profile." 
             redirect '/users/login'
         end
+    end
+
+    get '/users/signup' do
+        erb :'/users/create_new'
+    end
+
+    get '/users/login' do
+        erb :'/users/login'
     end
 
     post '/users/signup' do
@@ -79,6 +80,41 @@ class UserController < ApplicationController
             redirect '/'
         else 
             flash[:message] = "You cannot log out if you weren't ever logged in!" 
+            redirect '/'
+        end
+    end
+
+    patch '/users/profile/:id' do
+        name_dup_check = !!User.find_by(username: params["user"]["username"])
+        email_dup_check = !!User.find_by(email: params["user"]["email"]) 
+
+        if logged_in && current_user.id == params[:id].to_i
+            @user = current_user
+            if @user.authenticate(params["user"]["password"])
+                params["user"].each do |key, value|
+                    if name_dup_check && email_dup_check
+                        flash[:message] = "This username and email have already been registered to an account." 
+                        redirect "/users/profile/#{@user.id}/edit"
+                    elsif name_dup_check && !email_dup_check
+                        flash[:message] = "This username has already been taken, please choose another." 
+                        redirect "/users/profile/#{@user.id}/edit"
+                    elsif !name_dup_check && email_dup_check
+                        flash[:message] = "An account has already been registered to this email address." 
+                        redirect "/users/profile/#{@user.id}/edit"
+                    elsif value !=""
+                        @user.update(key => value)
+                    else 
+                        next
+                    end
+                end
+                flash[:message] = "Account successfully updated!" 
+                redirect "/users/profile/#{@user.id}"
+            else
+                flash[:message] = "Incorrect password" 
+                redirect "/users/profile/#{@user.id}"
+            end
+        else
+            flash[:message] = "You must be logged in to edit your account." 
             redirect '/'
         end
     end

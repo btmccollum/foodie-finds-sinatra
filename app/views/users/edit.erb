@@ -1,6 +1,10 @@
+<section class="flashmessage"><%= flash[:message] %></section>
+
 <div class="container new-post">
     <div class="row">
-        <form action="" method="post">
+        <form action="/users/profile/<%= @user.id %>" method="post">
+            <input id="hidden" type="hidden" name="_method" value="patch">
+
             <h5>My Account Information:</h5>
             <div class="form-group">
                 <label for="title">Username: </label>
