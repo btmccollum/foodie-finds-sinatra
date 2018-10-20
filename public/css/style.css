@@ -238,6 +238,10 @@ body {
     margin-bottom: 10px;
 }
 
+.profile-posts {
+    padding-top: 20px;
+}
+
 div.container-fluid.category-title {
     font-family: 'Bungee', cursive;
     background-color: rgba(75, 71, 71, 0.897);
@@ -300,7 +304,7 @@ div.row.new-comment {
 }
 
 footer.branding {
-   position:sticky;
+   position:absolute;
    padding-left: 10px;
    left:0px;
    bottom:0px;
