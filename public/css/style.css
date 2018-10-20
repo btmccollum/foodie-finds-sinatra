@@ -125,11 +125,28 @@ body {
     box-shadow: 0 1px 2px black;
     margin-bottom: 20px;
     display: inline-block;
+    position: flex;
 }
 
 .post .user-info {
+    position: relative;
+    height: 100%;
     width: 15%;
     padding: 15px 0 15px 15px;
+}
+
+.recent-posts {
+    margin-left: 15px;
+    font-weight: bold;
+    color: #546578;
+}
+
+.comment-replies {
+    padding-bottom: 20px;
+}
+
+.button-in-form {
+    padding-bottom: 20px;
 }
 
 .post .post-info {

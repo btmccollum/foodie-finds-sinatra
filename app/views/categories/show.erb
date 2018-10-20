@@ -31,14 +31,14 @@
                                 <div class="user-info pull-left">
                                     <div class="avatar">
                                         <p><img src="../images/no-photo.png" class="align-self-center mr-2"></p>
-                                        <p class="text-center"><span class="position-relative text-center"><%= (User.find(post.user_id)).username %></span></p>
+                                        
                                         <p class="text-center"><form><input type="button" value="+1" class="like-button align-self-center mr-2 text-center"> <%= post.score %></form></p>
                                     </div> <!-- close .avatar -->
                                 </div> <!-- close .user-info -->
                                         
                                 <div class="post-info pull-left">
                                     <div class="post-title post-info pull-left">
-                                        <p><span><a href="/categories/<%= @category.title %>/posts/<%= post.id %>"><%= post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= post.title %></a></span></p>
+                                        <p><span><%= (User.find(post.user_id)).username %>: <a href="/categories/<%= @category.title %>/posts/<%= post.id %>"><%= post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= post.title %></a></span></p>
                                         <span><%= post.location %></span>
                                     </div>
                                     <div class="post-info">

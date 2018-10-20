@@ -27,14 +27,13 @@
                             <div class="user-info pull-left">
                                 <div class="avatar">
                                     <img src="../images/no-photo.png" class="align-self-center mr-2">
-                                    <span><%= (User.find(@post.user_id)).username %></span>
                                     <form><input type="button" value="+1" class="like-button align-self-center mr-2"> <%= @post.score %></form>
                                 </div> <!-- close .avatar -->
                             </div> <!-- close .user-info -->
                                     
                             <div class="post-info pull-left">
                                 <div class="post-title post-info pull-left">
-                                    <p><span><%= @post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= @post.title %></span></p>
+                                    <p><span><%= (User.find(@post.user_id)).username %>: <%= @post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= @post.title %></span></p>
                                     <span><%= @post.location %></span>
                                 </div>
                                 <div class="post-info">
@@ -47,18 +46,21 @@
                             </div> <!-- close .post-info -->
                         </div> <!-- close .top-wrap -->
                                 
-                        <div class="postbottom">
+                        
+                    </div> <!-- close .post -->
+                    <div class="row comment-replies">
+                    <div class="col-2 postbottom align-item-center">
                                 <% if logged_in && @post.user_id == current_user.id %>
                                     <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/edit" method="get">
                                         <input type="submit" class="cbut text-center" value="Edit">
                                     </form>
                                 <% else %>
-                                    <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/new" method="get">
+                                    <form class="button-in-form" action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/new" method="get">
                                         <input type="submit" class="cbut text-center" value="Reply">
                                     </form>
                                 <% end %>            
-                        </div> <!-- close .postbottom -->
-                    </div> <!-- close .post -->
+                    </div> <!-- close .postbottom -->
+                    </div>
             
                             
                     <% @comments.each do |comment| %>
