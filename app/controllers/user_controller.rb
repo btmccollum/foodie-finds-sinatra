@@ -1,7 +1,7 @@
 class UserController < ApplicationController
     
     get '/users/profile/:id/edit' do
-        if logged_in && current_user.id == params[:id]
+        if logged_in && current_user.id == params[:id].to_i
             @user = current_user
             erb :'/users/edit'
         else
@@ -11,11 +11,12 @@ class UserController < ApplicationController
     end
 
     get '/users/profile/:id' do
-        if logged_in && current_user.id == params[:id]
+        binding.pry
+        if logged_in && current_user.id == params[:id].to_i
             @posts = Post.where(user_id: current_user.id)
             @user = current_user
             erb :'/users/show'
-        elsif logged_in && current_user.id != params[:id]
+        elsif logged_in && current_user.id != params[:id].to_i
             flash[:message] = "You cannot access another's profile." 
             redirect '/'
         else
