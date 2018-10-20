@@ -1,59 +1,70 @@
 <div class="container-fluid category-title">
-  <div class="row">
-    <div class ="col-8">
-      <nav aria-label="breadcrumb customnav">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item"><a href="/categories/<%= @category.title %>/posts"><%= @category.title.capitalize %></a></li>
-      </ol>
-      </nav>
-    </div>
+    <div class="row">
+        <div class ="col-8">
+        <nav aria-label="breadcrumb customnav">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/categories/<%= @category.title %>/posts"><%= @category.title.capitalize %></a></li>
+            </ol>
+        </nav>
+        </div> <!-- close .col -->
 
-    <div class=col-4 ml-1">
-      <form action="/categories/<%= @category.title %>/posts/new"> <input type="submit" class="postbutton" value="New Post"> </form>
-    </div>
-  </div>
+        <div class=col-4 ml-1">
+        <form action="/categories/<%= @category.title %>/posts/new"> <input type="submit" class="postbutton" value="New Post"> </form>
+        </div>
+    </div> <!-- close .row -->
+</div> <!-- close .container-fluid -->
+
+<div class="container-fluid">
+    <section class="flashmessage"><%= flash[:message] %></section>
+
+    <section class="content">
+        <div class= "container-fluid">
+            <div class= "row">
+                <div class="col-lg-8 col-md-8">
+
+                  <% @posts.each do |post| %>
+                    <div class="row new-post">
+                      <div class="col-lg-10 col-md-10">
+                        <div class="post">
+                            <div class="top-wrap">
+                                <div class="user-info pull-left">
+                                    <div class="avatar">
+                                        <p><img src="../images/no-photo.png" class="align-self-center mr-2"></p>
+                                        <p><span class="w-auto"><%= (User.find(post.user_id)).username %></span></p>
+                                        <p><form><input type="button" value="+1" class="like-button align-self-center mr-2"> <%= post.score %></form></p>
+                                    </div> <!-- close .avatar -->
+                                </div> <!-- close .user-info -->
+                                        
+                                <div class="post-info pull-left">
+                                    <div class="post-title post-info pull-left">
+                                        <p><span><%= post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= post.title %></span></p>
+                                        <span><%= post.location %></span>
+                                    </div>
+                                    <div class="post-info">
+                                        <p><span><%= post.content %></span></p>    
+                                    </div>
+                                    <span class="post-footer">Posted at <%= post.created_at %></span>
+                                </div> <!-- close .post-info -->
+                            </div> <!-- close .top-wrap -->
+                                    
+                            <div class="postbottom">         
+                            </div> <!-- close .postbottom -->
+                          </div> <!-- close .post -->
+                        </div> <!-- close .col-lg-12 -->
+                      </div> <!-- close .row -->
+                  <% end %>
+
+                <div class="col-lg-4 col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <ul class="list-group list-group-flush d-flex justify-content-between align-items-center">
+                            <% @categories.each do |category| %>
+                                <li class="category-listing"><a href="/categories/<%=category.title%>/posts" class=""><%=category.title.split(" ").map{|word| word.capitalize}.join(" ")%><span class="badge pull-right">#</span></a></li> 
+                            <% end %>
+                        </ul>
+                    </div> <!-- close .card -->
+                </div> <!-- close .col-lg-4 -->
+            </div> <!-- close .row -->
+        </div> <!-- close .container -->
+    </section>
 </div>
-
-<section class="flashmessage"><%= flash[:message] %></section>
-
-<% @posts.each do |post| %>
-
-<div class="container posting">
-  <div class="row">
-      <div class="col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2">
-
-        <div class="post">
-          <div class="row">
-            <div class="col-3 user-info pull-left align-self-center">
-                <div class="avatar">
-                  <img src="../images/no-photo.png" class="align-self-center mr-2">
-                  <p><%=(User.find(post.user_id)).username%></p>
-                  <form><input type="button" value="+1" class="like-button align-self-center mr-2"> <%=post.score%></form>
-                </div>
-            </div>
-              
-            <div class="col-9 post-info pull-left">
-                <div class="post-title">
-                  <section><a href="/categories/<%= @category.title %>/posts/<%= post.id %>"><%= post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= post.title %></a></section>
-                  <section><%=post.location%></section>
-                </div>
-                <p><%=post.content%></p>    
-                <section class="replies-count">Replies: <%=post.comments.count%></section>
-                <section class="post-footer">Posted at <%= post.created_at %></section>
-            </div>
-              
-            <div class="postbottom">
-            
-                <div class="clearfix">
-                
-                </div>
-            </div>
-          </div> <!-- close .row -->
-        </div> <!-- close .post -->
-
-     </div> <!-- close .col-sm -->
-  </div> <!-- close .row -->
-</div> <!-- close.container-posting -->
-
-<% end %>

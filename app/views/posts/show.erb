@@ -34,10 +34,12 @@
                                     
                             <div class="post-info pull-left">
                                 <div class="post-title post-info pull-left">
-                                    <span><%= @post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= @post.title %></span>
+                                    <p><span><%= @post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= @post.title %></span></p>
                                     <span><%= @post.location %></span>
                                 </div>
-                                <span><%= @post.content %></span>    
+                                <div class="post-info">
+                                    <p><span><%= @post.content %></span></p>    
+                                </div>
                                 <span class="post-footer">Posted at <%= @post.created_at %></span>
                             </div> <!-- close .post-info -->
                         </div> <!-- close .top-wrap -->

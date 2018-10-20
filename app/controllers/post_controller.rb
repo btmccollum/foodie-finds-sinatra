@@ -31,6 +31,7 @@ class PostController < ApplicationController
     end
 
     get '/categories/:category/posts' do
+        @categories = Category.all
         @category = Category.find_by(title: params[:category])
         @posts = Post.where(category_id: @category.id)
         

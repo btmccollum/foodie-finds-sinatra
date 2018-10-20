@@ -262,14 +262,15 @@ ol.breadcrumb a {
     color: #B5EDF7;
 }
 
-
 #button-rows{
     position: absolute;
     bottom: 10px;
     width: 100%;
   }
 
-
+div.row.new-post {
+    height: auto;
+}
 
 div.row.new-comment {
     height: auto;
