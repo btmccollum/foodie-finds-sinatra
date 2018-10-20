@@ -30,13 +30,18 @@ class CommentController < ApplicationController
         @post = Post.find(params[:id])
 
         if logged_in 
-            @comment = Comment.new(params["comment"])
-            @comment.user_id = current_user.id
-            @comment.post_id = @post.id
-            @comment.score = 1
-            @comment.save
+            if !params.any?{|key, value| value == ""}
+                @comment = Comment.new(params["comment"])
+                @comment.user_id = current_user.id
+                @comment.post_id = @post.id
+                @comment.score = 1
+                @comment.save
 
-            redirect "/categories/#{@category.title}/posts/#{@post.id}"
+                redirect "/categories/#{@category.title}/posts/#{@post.id}"
+            else
+                flash[:message] = "All fields required" 
+                redirect "/categories/#{@category.title}/posts/#{@post.id}/comments/new"
+            end
         else 
             flash[:message] = "You must be logged in to reply." 
             redirect "/categories/#{@category.title}/posts/#{@post.id}"
