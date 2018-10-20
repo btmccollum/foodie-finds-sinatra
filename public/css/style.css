@@ -263,6 +263,14 @@ div.container.top-post {
     margin-top: 20px;
 }
 
+div.welcomeblurb {
+    padding-bottom: 10px;
+}
+
+h1.welcometitle {
+    color: #546578;
+}
+
 ol.breadcrumb {
     background-color: #565252;
 }
@@ -291,6 +299,6 @@ div.row.new-comment {
 }
 
 footer.branding {
-    position: relative;
+    position: static;
     padding-left: 10px;
 }
