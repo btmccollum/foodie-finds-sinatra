@@ -25,15 +25,21 @@ class UserController < ApplicationController
     end
 
     get '/users/signup' do
-        erb :'/users/create_new'
+        if logged_in
+            flash[:message] = "You already have an account." 
+            redirect '/'
+        else 
+            erb :'/users/create_new'
+        end
     end
 
     get '/users/login' do
         if logged_in
             flash[:message] = "You are already logged in." 
-            redirect '/users/login'
-
-        erb :'/users/login'
+            redirect '/'
+        else
+            erb :'/users/login'
+        end
     end
 
     post '/users/signup' do
@@ -84,6 +90,7 @@ class UserController < ApplicationController
     get '/users/logout' do
         if logged_in
             session.clear
+            flash[:message] = "You have been successfully logged out." 
             redirect '/'
         else 
             flash[:message] = "You cannot log out if you weren't ever logged in!" 
