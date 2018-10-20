@@ -21,43 +21,42 @@
     <section class="content">
         <div class= "container-fluid">
             <div class= "row">
-                <div class="col-lg-8 col-md-8">
+                <div class="col-lg-9 col-md-9">
 
                   <% @posts.each do |post| %>
-                    <div class="row new-post">
-                      <div class="col-lg-10 col-md-10">
+                    
+                      <div class="col-lg-12 col-md-12">
                         <div class="post">
                             <div class="top-wrap">
                                 <div class="user-info pull-left">
                                     <div class="avatar">
                                         <p><img src="../images/no-photo.png" class="align-self-center mr-2"></p>
-                                        <p><span class="w-auto"><%= (User.find(post.user_id)).username %></span></p>
-                                        <p><form><input type="button" value="+1" class="like-button align-self-center mr-2"> <%= post.score %></form></p>
+                                        <p class="text-center"><span class="position-relative text-center"><%= (User.find(post.user_id)).username %></span></p>
+                                        <p class="text-center"><form><input type="button" value="+1" class="like-button align-self-center mr-2 text-center"> <%= post.score %></form></p>
                                     </div> <!-- close .avatar -->
                                 </div> <!-- close .user-info -->
                                         
                                 <div class="post-info pull-left">
                                     <div class="post-title post-info pull-left">
-                                        <p><span><%= post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= post.title %></span></p>
+                                        <p><span><a href="/categories/<%= @category.title %>/posts/<%= post.id %>"><%= post.city.split(" ").map{|word| word.capitalize}.join(" ") %> / <%= post.title %></a></span></p>
                                         <span><%= post.location %></span>
                                     </div>
                                     <div class="post-info">
                                         <p><span><%= post.content %></span></p>    
                                     </div>
-                                    <span class="post-footer">Posted at <%= post.created_at %></span>
+                                    <div>
+                                      <span class="post-info post-footer">Posted at <%= post.created_at %></span>
+                                    </div>
                                 </div> <!-- close .post-info -->
                             </div> <!-- close .top-wrap -->
-                                    
-                            <div class="postbottom">         
-                            </div> <!-- close .postbottom -->
                           </div> <!-- close .post -->
                         </div> <!-- close .col-lg-12 -->
-                      </div> <!-- close .row -->
+                   
                   <% end %>
-
-                <div class="col-lg-4 col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <ul class="list-group list-group-flush d-flex justify-content-between align-items-center">
+                </div>      
+                <div class="col-lg-3 col-md-3">
+                    <div class="card mx-auto" style="width: 10rem;">
+                        <ul class="list-group list-group-flush d-flex justify-content-between align-items-left align-content-center ml-3">
                             <% @categories.each do |category| %>
                                 <li class="category-listing"><a href="/categories/<%=category.title%>/posts" class=""><%=category.title.split(" ").map{|word| word.capitalize}.join(" ")%><span class="badge pull-right">#</span></a></li> 
                             <% end %>

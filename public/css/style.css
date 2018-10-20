@@ -131,6 +131,7 @@ body {
 
 .post .post-info {
     width: 85%;
+    padding-left: 20px;
     padding-right: 30px;
     padding-top: 20px;
     padding-bottom: 15px;
@@ -150,7 +151,7 @@ body {
     line-height: 10px;
 }
 
-.post .post-info section.post-footer {
+.post .post-info.post-footer {
     font-style: italic;
     font-size: .75em;
     border-top: solid 1px #f1f1f1;
@@ -223,8 +224,8 @@ body {
     border-radius: 5px;
 }
 
-.username {
-    
+.move-right {
+    margin-left: 25px;
 }
 
 div.container-fluid.category-title {
