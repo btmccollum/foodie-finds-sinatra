@@ -105,6 +105,8 @@ body {
     text-align: center;
     font-weight: bold;
     font-style: italic;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .category-listing {

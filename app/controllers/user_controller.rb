@@ -1,7 +1,7 @@
 class UserController < ApplicationController
     
     get '/users/profile/:id/edit' do
-        if logged_in && current_user.id == params[:id].to_i
+        if logged_in && current_user.id == params[:id]
             @user = current_user
             erb :'/users/edit'
         else
@@ -11,10 +11,13 @@ class UserController < ApplicationController
     end
 
     get '/users/profile/:id' do
-        if logged_in && session[:user_id] == current_user.id
+        if logged_in && current_user.id == params[:id]
             @posts = Post.where(user_id: current_user.id)
             @user = current_user
             erb :'/users/show'
+        elsif logged_in && current_user.id != params[:id]
+            flash[:message] = "You cannot access another's profile." 
+            redirect '/'
         else
             flash[:message] = "You must be logged in to access your profile." 
             redirect '/users/login'
@@ -26,6 +29,10 @@ class UserController < ApplicationController
     end
 
     get '/users/login' do
+        if logged_in
+            flash[:message] = "You are already logged in." 
+            redirect '/users/login'
+
         erb :'/users/login'
     end
 
@@ -87,7 +94,7 @@ class UserController < ApplicationController
     patch '/users/profile/:id' do
         name_dup_check = !!User.find_by(username: params["user"]["username"])
         email_dup_check = !!User.find_by(email: params["user"]["email"]) 
-
+        
         if logged_in && current_user.id == params[:id].to_i
             @user = current_user
             if @user.authenticate(params["user"]["password"])
