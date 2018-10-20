@@ -13,7 +13,6 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    binding.pry
     @posts = Post.order('created_at DESC').limit(5)
     @categories = Category.all
    
