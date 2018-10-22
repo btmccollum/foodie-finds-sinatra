@@ -11,7 +11,6 @@ class UserController < ApplicationController
     end
 
     get '/users/profile/:id' do
-        binding.pry
         if logged_in && current_user.id == params[:id].to_i
             @posts = Post.where(user_id: current_user.id)
             @user = current_user
