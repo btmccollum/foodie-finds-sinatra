@@ -46,8 +46,9 @@
                                     <div class="post-info">
                                         <p><span><%= post.content %></span></p>    
                                     </div>
-                                    <div>
-                                      <span class="post-info post-footer">Posted at <%= post.created_at %></span>
+                                    <div class="post-footer-section">
+                                        <span class="post-info replies-count">Replies: <%=post.comments.count%></span>
+                                        <span class="post-info post-footer">Posted at <%= post.created_at %></span>
                                     </div>
                                 </div> <!-- close .post-info -->
                             </div> <!-- close .top-wrap -->
@@ -57,6 +58,7 @@
                   <% end %>
                 </div>      
                 <div class="col-lg-3 col-md-3">
+                <p class="recent-posts">Categories:<p>
                     <div class="card mx-auto cats-list" style="width: 10rem;">
                         <ul class="list-group list-group-flush d-flex justify-content-between align-items-left align-content-center ml-3">
                             <% @categories.each do |category| %>

@@ -1,3 +1,5 @@
+<!-- HEADER BREADCRUMBS -->
+
 <div class="container-fluid category-title">
   <div class="row">
     <div class ="col-8">
@@ -17,31 +19,35 @@
 
 <section class="flashmessage"><%= flash[:message] %></section>
 
+<!-- NEW POST DISPLAY -->
+
 <div class="container new-post">
     <div class="row">
         <form action="/categories/<%=@category.title%>/posts" method="post">
-            <h5>Creating a New Post for <%=@category.title.capitalize%></h5>
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" name="post[title]" placeholder="The Spiciest Salsa Ever...">
-            </div>
+            <div class="container new-post">
+                <h5>Creating a New Post for <%=@category.title.capitalize%>:</h5>
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" name="post[title]" placeholder="The Spiciest Salsa Ever...">
+                </div>
 
-            <div class="form-group">
-                <label for="exampleFormControlInput1">City</label>
-                <input type="text" class="form-control" name="post[city]" placeholder="Chicago...">
-            </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">City</label>
+                    <input type="text" class="form-control" name="post[city]" placeholder="Chicago...">
+                </div>
 
-            <div class="form-group">
-                <label for="location">Location</label>
-                <input type="text" class="form-control" name="post[location]" placeholder="ABC Restaurant...">
-            </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" class="form-control" name="post[location]" placeholder="ABC Restaurant...">
+                </div>
 
-            <div class="form-group">
-                <label for="content">Content</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" name="post[content]" rows="3" placeholder="Tell us about what you found..."></textarea>
-            </div>
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="post[content]" rows="3" placeholder="Tell us about what you found..."></textarea>
+                </div>
 
-            <input type="submit" class="btn btn-primary">
+                <input type="submit" id="submit-form-button" class="btn btn-primary">
+            </div>
         </form>
     </div> <!-- close .row -->
 </div> <!-- close .container -->
