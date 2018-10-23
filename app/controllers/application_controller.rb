@@ -26,9 +26,21 @@ class ApplicationController < Sinatra::Base
       end
     end
 
-    def is_post_owner(params)
+    def valid_user
+      current_user.id == params[:id].to_i ? true : false
+    end
+
+    def is_post_owner
       @post = Post.find(params[:id])
       @post.user_id == current_user.id ? true : false
+    end
+
+    def duplicate_username?
+      User.find_by(username: params["user"]["username"]) ? true : false
+    end
+
+    def duplicate_email?
+      User.find_by(email: params["user"]["email"]) ? true : false
     end
 
     def is_comment_owner(params)

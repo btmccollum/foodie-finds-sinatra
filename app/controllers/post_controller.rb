@@ -1,8 +1,9 @@
 class PostController < ApplicationController
     get '/categories/:category/posts/:id/edit' do
-        if logged_in && is_post_owner(params)
+        if logged_in && is_post_owner
             @category = Category.find_by(title: params[:category])
             @post = Post.find(params[:id])
+
             erb :'/posts/edit'
         else
             flash[:message] = "You cannot edit a post you did not create." 
@@ -64,13 +65,11 @@ class PostController < ApplicationController
     patch '/categories/:category/posts/:id' do
         @category = Category.find_by(title: params[:category])
 
-        if logged_in && is_post_owner(params)
+        if logged_in && is_post_owner
             @post = Post.find(params[:id])
             params["post"].each do |key, value|
                 if value != ""
                     @post.update(key => value)
-                else
-                    next
                 end
             end
             redirect "/categories/#{@category.title}/posts/#{@post.id}"
@@ -83,9 +82,10 @@ class PostController < ApplicationController
     delete '/categories/:category/posts/:id/delete' do
         @category = Category.find_by(title: params[:category])
 
-        if logged_in && is_post_owner(params)
+        if logged_in && is_post_owner
             @post = Post.find(params[:id])
             @post.destroy
+            
             redirect "/categories/#{@category.title}/posts"
         else
             flash[:message] = "You cannot delete a post you did not create." 

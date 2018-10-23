@@ -1,7 +1,7 @@
 class UserController < ApplicationController
     
     get '/users/profile/:id/edit' do
-        if logged_in && current_user.id == params[:id].to_i
+        if logged_in && valid_user
             @user = current_user
             erb :'/users/edit'
         else
@@ -11,11 +11,12 @@ class UserController < ApplicationController
     end
 
     get '/users/profile/:id' do
-        if logged_in && current_user.id == params[:id].to_i
+        if logged_in && valid_user
             @posts = Post.where(user_id: current_user.id)
             @user = current_user
+
             erb :'/users/show'
-        elsif logged_in && current_user.id != params[:id].to_i
+        elsif logged_in && !valid_user
             flash[:message] = "You cannot access another's profile." 
             redirect '/'
         else
@@ -46,17 +47,17 @@ class UserController < ApplicationController
         name_dup_check = !!User.find_by(username: params["user"]["username"])
         email_dup_check = !!User.find_by(email: params["user"]["email"]) 
 
-        if name_dup_check && email_dup_check
+        if duplicate_username? && duplicate_email?
             flash[:message] = "This username and email have already been registered to an account." 
             redirect '/users/signup'
-        elsif name_dup_check && !email_dup_check
+        elsif duplicate_username? && !duplicate_email?
             flash[:message] = "This username has already been taken, please choose another." 
             redirect '/users/signup'
-        elsif !name_dup_check && email_dup_check
+        elsif !duplicate_username? && duplicate_email?
             flash[:message] = "An account has already been registered to this email address." 
             redirect '/users/signup'
         elsif !params.any?{|key, value| value == ""}
-            @user = User.new(:username => params["user"]["username"].downcase, :email => params["user"]["email"], :password => params["user"]["password"], :reputation => 0)
+            @user = User.new(:username => params["user"]["username"].downcase, :email => params["user"]["email"].downcase, :password => params["user"]["password"], :reputation => 0)
 
             if @user.save
                 session[:user_id] = @user.id
@@ -64,11 +65,11 @@ class UserController < ApplicationController
                 
                 redirect '/'
             else
-                flash[:message] = "Uh oh! Something went wrong. Please try again." 
+                flash[:message] = "All fields are required." 
                 redirect '/users/signup'
             end
         else
-            flash[:message] = "Invalid information provided. All fields are required. Please try again." 
+            flash[:message] = "Uh oh! Something went wrong. Please try again." 
             redirect '/users/signup'
         end
     end
