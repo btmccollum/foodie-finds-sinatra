@@ -98,7 +98,6 @@ class UserController < ApplicationController
     patch '/users/profile/:id' do
         if logged_in && valid_user
             @user = current_user
-            binding.pry
             if @user.authenticate(params["password"])
                 params["user"].each do |key, value|
                     if duplicate_username? && duplicate_email?
