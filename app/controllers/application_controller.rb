@@ -43,7 +43,7 @@ class ApplicationController < Sinatra::Base
       User.find_by(email: params["user"]["email"]) ? true : false
     end
 
-    def is_comment_owner(params)
+    def is_comment_owner
       @comment = Comment.find(params[:comment_id])
       @comment.user_id == current_user.id ? true : false
     end

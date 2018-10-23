@@ -3,7 +3,7 @@ class CommentController < ApplicationController
         @category = Category.find_by(title: params[:category])
         @post = Post.find(params[:id])
         
-        if logged_in && is_comment_owner(params)
+        if logged_in && is_comment_owner
             @comment = Comment.find(params[:comment_id])
            
             erb :'/comments/edit'
@@ -52,15 +52,14 @@ class CommentController < ApplicationController
         @category = Category.find_by(title: params[:category])
         @post = Post.find(params[:id])
 
-        if logged_in && is_comment_owner(params)
+        if logged_in && is_comment_owner
             @comment = Comment.find(params[:comment_id])
             params["comment"].each do |key, value|
                 if value != ""
                     @comment.update(key => value)
-                else
-                    next
                 end
             end
+            flash[:message] = "Post successfully updated." 
             redirect "/categories/#{@category.title}/posts/#{@post.id}"
         else
             flash[:message] = "You cannot edit a post you did not create." 
@@ -72,9 +71,10 @@ class CommentController < ApplicationController
         @category = Category.find_by(title: params[:category])
         @post = Post.find(params[:id])
 
-        if logged_in && is_comment_owner(params)
+        if logged_in && is_comment_owner
             @comment = Comment.find(params[:comment_id])
             @comment.destroy
+
             redirect "/categories/#{@category.title}/posts/#{@post.id}"
         else
             flash[:message] = "You cannot delete a comment you did not create." 

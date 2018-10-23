@@ -12,9 +12,9 @@ class PostController < ApplicationController
     end
 
     get '/categories/:category/posts/new' do
-        if logged_in
-            @category = Category.find_by(title: params[:category])
+        @category = Category.find_by(title: params[:category])
 
+        if logged_in
             erb :'/posts/new'
         else 
             flash[:message] = "You must be logged in to create a post." 
@@ -47,7 +47,7 @@ class PostController < ApplicationController
                 @post = Post.new(params["post"])
                 @post.category_id = @category.id
                 @post.user_id = current_user.id
-                @post.score = 0
+                @post.score = 1
                 @post.save
 
                 redirect "/categories/#{@category.title}/posts/#{@post.id}"
@@ -85,7 +85,8 @@ class PostController < ApplicationController
         if logged_in && is_post_owner
             @post = Post.find(params[:id])
             @post.destroy
-            
+
+            flash[:message] = "Your post was succesfully removed." 
             redirect "/categories/#{@category.title}/posts"
         else
             flash[:message] = "You cannot delete a post you did not create." 

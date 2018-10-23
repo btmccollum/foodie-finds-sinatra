@@ -98,20 +98,22 @@ class UserController < ApplicationController
     patch '/users/profile/:id' do
         if logged_in && valid_user
             @user = current_user
-            if @user.authenticate(params["user"]["password"])
+            binding.pry
+            if @user.authenticate(params["password"])
                 params["user"].each do |key, value|
-                    if duplicate_name? && duplicate_email?
+                    if duplicate_username? && duplicate_email?
                         flash[:message] = "This username and email have already been registered to an account." 
                         redirect "/users/profile/#{@user.id}/edit"
-                    elsif duplicate_name? && !duplicate_email?
+                    elsif duplicate_username? && !duplicate_email?
                         flash[:message] = "This username has already been taken, please choose another." 
                         redirect "/users/profile/#{@user.id}/edit"
-                    elsif !duplicate_name? && duplicate_email?
+                    elsif !duplicate_username? && duplicate_email?
                         flash[:message] = "An account has already been registered to this email address." 
                         redirect "/users/profile/#{@user.id}/edit"
-                    elsif value !=""
-                        @user.update(key => value)
+                    else
+                        next
                     end
+                    @user.update(params["user"])
                 end
                 flash[:message] = "Account successfully updated!" 
                 redirect "/users/profile/#{@user.id}"
