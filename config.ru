@@ -7,6 +7,7 @@ end
 use Rack::MethodOverride
 
 use UserController
+use CategoryController
 use PostController
 use CommentController
 run ApplicationController
