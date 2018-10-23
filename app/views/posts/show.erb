@@ -90,21 +90,20 @@
                                         
                                 </div> <!-- close .comments -->
                             </div> <!-- close .col -->
+                            
                             <div class="col-lg-2 col-md-2 cresp">
-                                        <div class="commentbottom ">
-                                            <% if logged_in && comment.user_id == current_user.id %>
-                                                <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/<%= comment.id %>/edit" method="get">
-                                                    <input type="submit" class="cbut align-content-center" value="Edit">
-                                                </form>
-                                            <% else %>
-                                                <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/new" method="get">
-                                                    <input type="submit" class="cbut align-content-center" value="Reply">
-                                                </form>
-                                            <% end %>  
-                                        </div> <!-- close .commentbottom -->
-                                    
-                                        </div>
-                                        
+                                <div class="commentbottom ">
+                                    <% if logged_in && comment.user_id == current_user.id %>
+                                        <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/<%= comment.id %>/edit" method="get">
+                                            <input type="submit" class="cbut align-content-center" value="Edit">
+                                        </form>
+                                    <% else %>
+                                        <form action="/categories/<%= @category.title %>/posts/<%= @post.id %>/comments/new" method="get">
+                                            <input type="submit" class="cbut align-content-center" value="Reply">
+                                        </form>
+                                    <% end %>  
+                                </div> <!-- close .commentbottom -->
+                            </div>   
                         </div> <!-- close .row -->
                     <% end %>
                 </div> <!-- close .col-lg-8 -->

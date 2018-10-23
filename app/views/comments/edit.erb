@@ -21,29 +21,28 @@
 
 <!-- ORIGINAL COMMENT DISPLAY -->
 
-Original Comment:
-
-<div class="container comments">
+<div class="container comments top-post">
     <div class="row">
+        <h5>Original Comment: </h5>
         <div class="col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2">
-            <div class="post">
-            <div class="row">
-                <div class="col-3 user-info pull-left align-self-center">
-                    <div class="avatar">
-                    <img src="../images/no-photo.png" class="align-self-center mr-2">
-                    <p><%=(User.find(@comment.user_id)).username%></p>
-                    <form><input type="button" value="+1" class="like-button align-self-center mr-2"> <%=@comment.score%></form>
-                    </div>
-                </div>
+                <div class="col-lg-12 col-md-12">
+                    <div class="comment"> 
+                        <div class="top-wrap"> 
+                            <div class="user-info pull-left">
+                                <div class="avatar">
+                                    <p><img src="../images/no-photo.png" class="align-self-center mr-2"></p>
+                                    <p><form><input type="button" value="+1" class="like-button align-self-center mr-2"> <%=@comment.score%></form></p>
+                                </div> <!-- close .avatar -->
+                            </div> <!-- close .user-info -->
                 
-                <div class="col-9 post-info pull-left">
-                    <p><%=@comment.content%></p>    
-                    <section class="post-footer">Posted at <%= @comment.created_at %></section>
-                </div>
-    
-                <div class="postbottom"></div>
-            </div> <!-- close .row -->
-        </div> <!-- close .post -->
+                            <div class="comment-info pull-left">
+                                <p><span class="w-auto"><%=(User.find(@comment.user_id)).username%>:</span></p>
+                                <p><span><%=@comment.content%></span></p> 
+                                <p><span class="comment-footer">Posted at <%= @comment.created_at %></span></p>
+                            </div> <!-- close .comment-info -->
+                        </div> <!-- close .top-wrap -->
+                    </div> <!-- close .comment -->
+                </div> <!-- close .col -->
         </div> <!-- close .col-sm -->
     </div> <!-- close .row -->
 </div> <!-- close.container-posting -->
