@@ -44,9 +44,6 @@ class UserController < ApplicationController
     end
 
     post '/users/signup' do
-        name_dup_check = !!User.find_by(username: params["user"]["username"])
-        email_dup_check = !!User.find_by(email: params["user"]["email"]) 
-
         if duplicate_username? && duplicate_email?
             flash[:message] = "This username and email have already been registered to an account." 
             redirect '/users/signup'
@@ -62,7 +59,6 @@ class UserController < ApplicationController
             if @user.save
                 session[:user_id] = @user.id
                 flash[:message] = "Account was successfully created."
-                
                 redirect '/'
             else
                 flash[:message] = "All fields are required." 
@@ -80,7 +76,7 @@ class UserController < ApplicationController
         if @user && @user.authenticate(params["password"])
             session.clear
             session[:user_id] = @user.id
-            flash[:message] = "Welcome, #{@user.username}" 
+            flash[:message] = "Welcome, #{@user.username}!" 
             redirect '/'
         else 
             flash[:message] = "Uh oh! Something went wrong. Please try again." 
@@ -100,26 +96,21 @@ class UserController < ApplicationController
     end
 
     patch '/users/profile/:id' do
-        name_dup_check = !!User.find_by(username: params["user"]["username"])
-        email_dup_check = !!User.find_by(email: params["user"]["email"]) 
-        
-        if logged_in && current_user.id == params[:id].to_i
+        if logged_in && valid_user
             @user = current_user
             if @user.authenticate(params["user"]["password"])
                 params["user"].each do |key, value|
-                    if name_dup_check && email_dup_check
+                    if duplicate_name? && duplicate_email?
                         flash[:message] = "This username and email have already been registered to an account." 
                         redirect "/users/profile/#{@user.id}/edit"
-                    elsif name_dup_check && !email_dup_check
+                    elsif duplicate_name? && !duplicate_email?
                         flash[:message] = "This username has already been taken, please choose another." 
                         redirect "/users/profile/#{@user.id}/edit"
-                    elsif !name_dup_check && email_dup_check
+                    elsif !duplicate_name? && duplicate_email?
                         flash[:message] = "An account has already been registered to this email address." 
                         redirect "/users/profile/#{@user.id}/edit"
                     elsif value !=""
                         @user.update(key => value)
-                    else 
-                        next
                     end
                 end
                 flash[:message] = "Account successfully updated!" 
