@@ -1,6 +1,6 @@
 class UserController < ApplicationController
     
-    get '/users/profile/:id/edit' do
+    get '/users/:id/edit' do
         if logged_in && valid_user
             @user = current_user
             erb :'/users/edit'
@@ -10,7 +10,36 @@ class UserController < ApplicationController
         end
     end
 
-    get '/users/profile/:id' do
+    get '/users/signup' do
+        if logged_in
+            flash[:message] = "You already have an account." 
+            redirect '/'
+        else 
+            erb :'/users/new'
+        end
+    end
+
+    get '/users/login' do
+        if logged_in
+            flash[:message] = "You are already logged in." 
+            redirect '/'
+        else
+            erb :'/users/login'
+        end
+    end
+
+    get '/users/logout' do
+        if logged_in
+            session.clear
+            flash[:message] = "You have been successfully logged out." 
+            redirect '/'
+        else 
+            flash[:message] = "You cannot log out if you weren't ever logged in!" 
+            redirect '/'
+        end
+    end
+
+    get '/users/:id' do
         if logged_in && valid_user
             @posts = Post.where(user_id: current_user.id)
             @user = current_user
@@ -22,24 +51,6 @@ class UserController < ApplicationController
         else
             flash[:message] = "You must be logged in to access your profile." 
             redirect '/users/login'
-        end
-    end
-
-    get '/users/signup' do
-        if logged_in
-            flash[:message] = "You already have an account." 
-            redirect '/'
-        else 
-            erb :'/users/create_new'
-        end
-    end
-
-    get '/users/login' do
-        if logged_in
-            flash[:message] = "You are already logged in." 
-            redirect '/'
-        else
-            erb :'/users/login'
         end
     end
 
@@ -84,41 +95,29 @@ class UserController < ApplicationController
         end
     end
 
-    get '/users/logout' do
-        if logged_in
-            session.clear
-            flash[:message] = "You have been successfully logged out." 
-            redirect '/'
-        else 
-            flash[:message] = "You cannot log out if you weren't ever logged in!" 
-            redirect '/'
-        end
-    end
-
-    patch '/users/profile/:id' do
+    patch '/users/:id' do
         if logged_in && valid_user
-            @user = current_user
-            if @user.authenticate(params["password"])
+            if current_user.authenticate(params["password"])
                 params["user"].each do |key, value|
                     if duplicate_username? && duplicate_email?
                         flash[:message] = "This username and email have already been registered to an account." 
-                        redirect "/users/profile/#{@user.id}/edit"
+                        redirect "/users/#{current_user.id}/edit"
                     elsif duplicate_username? && !duplicate_email?
                         flash[:message] = "This username has already been taken, please choose another." 
-                        redirect "/users/profile/#{@user.id}/edit"
+                        redirect "/users/#{current_user.id}/edit"
                     elsif !duplicate_username? && duplicate_email?
                         flash[:message] = "An account has already been registered to this email address." 
-                        redirect "/users/profile/#{@user.id}/edit"
+                        redirect "/users/#{current_user.id}/edit"
                     else
                         next
                     end
-                    @user.update(params["user"])
                 end
+                params["user"].each {|key, value| value != "" ? current_user.update(key => value) : next}
                 flash[:message] = "Account successfully updated!" 
-                redirect "/users/profile/#{@user.id}"
+                redirect "/users/#{current_user.id}"
             else
                 flash[:message] = "Incorrect password" 
-                redirect "/users/profile/#{@user.id}"
+                redirect "/users/#{current_user.id}"
             end
         else
             flash[:message] = "You must be logged in to edit your account." 

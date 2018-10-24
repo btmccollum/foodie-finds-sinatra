@@ -5,7 +5,7 @@
     <h5>My Account Information:</h5>
 
     <p>In order to change your username or email, please fill out the appropriate field below and enter your password. Please update only those fields that you wish to update.</p>
-        <form action="/users/profile/<%= @user.id %>" method="post">
+        <form action="/users/<%= @user.id %>" method="post">
             <input id="hidden" type="hidden" name="_method" value="patch">
 
             <div class="form-group">
