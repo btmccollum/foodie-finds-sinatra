@@ -3,7 +3,9 @@ class CommentController < ApplicationController
         @category = Category.find_by(title: params[:category])
         @post = Post.find(params[:id])
         
-        if logged_in && is_comment_owner
+        redirect_if_not_logged_in
+
+        if is_comment_owner
             @comment = Comment.find(params[:comment_id])
            
             erb :'/comments/edit'
@@ -17,34 +19,27 @@ class CommentController < ApplicationController
         @category = Category.find_by(title: params[:category])
         @post = Post.find(params[:id])
 
-        if logged_in
-            erb :'/comments/new'
-        else 
-            flash[:message] = "You must be logged in to reply." 
-            redirect "/categories/#{@category.title}/posts/#{@post.id}"
-        end
+        redirect_if_not_logged_in
+        erb :'/comments/new'
     end
 
     post '/categories/:category/posts/:id/comments' do
         @category = Category.find_by(title: params[:category])
         @post = Post.find(params[:id])
 
-        if logged_in 
-            if !params.any?{|key, value| value == ""}
-                @comment = Comment.new(params["comment"])
-                @comment.user_id = current_user.id
-                @comment.post_id = @post.id
-                @comment.score = 1
-                @comment.save
+        redirect_if_not_logged_in
+            
+        if !params.any?{|key, value| value == ""}
+            @comment = Comment.new(params["comment"])
+            @comment.user_id = current_user.id
+            @comment.post_id = @post.id
+            @comment.score = 1
+            @comment.save
 
-                redirect "/categories/#{@category.title}/posts/#{@post.id}"
-            else
-                flash[:message] = "All fields required" 
-                redirect "/categories/#{@category.title}/posts/#{@post.id}/comments/new"
-            end
-        else 
-            flash[:message] = "You must be logged in to reply." 
             redirect "/categories/#{@category.title}/posts/#{@post.id}"
+        else
+            flash[:message] = "All fields required" 
+            redirect "/categories/#{@category.title}/posts/#{@post.id}/comments/new"
         end
     end
 
@@ -52,7 +47,9 @@ class CommentController < ApplicationController
         @category = Category.find_by(title: params[:category])
         @post = Post.find(params[:id])
 
-        if logged_in && is_comment_owner
+        redirect_if_not_logged_in
+
+        if is_comment_owner
             @comment = Comment.find(params[:comment_id])
             params["comment"].each do |key, value|
                 if value != ""
@@ -71,7 +68,9 @@ class CommentController < ApplicationController
         @category = Category.find_by(title: params[:category])
         @post = Post.find(params[:id])
 
-        if logged_in && is_comment_owner
+        redirect_if_not_logged_in
+
+        if is_comment_owner
             @comment = Comment.find(params[:comment_id])
             @comment.destroy
 

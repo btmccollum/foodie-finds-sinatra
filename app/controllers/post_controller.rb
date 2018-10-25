@@ -1,6 +1,8 @@
 class PostController < ApplicationController
     get '/categories/:category/posts/:id/edit' do
-        if logged_in && is_post_owner
+        redirect_if_not_logged_in
+
+        if is_post_owner
             @category = Category.find_by(title: params[:category])
             @post = Post.find(params[:id])
 
@@ -13,13 +15,9 @@ class PostController < ApplicationController
 
     get '/categories/:category/posts/new' do
         @category = Category.find_by(title: params[:category])
-
-        if logged_in
-            erb :'/posts/new'
-        else 
-            flash[:message] = "You must be logged in to create a post." 
-            redirect '/users/login'
-        end
+        redirect_if_not_logged_in
+        
+        erb :'/posts/new'
     end
     
     get '/categories/:category/posts/:id' do
@@ -42,32 +40,29 @@ class PostController < ApplicationController
     post '/categories/:category/posts' do 
         @category = Category.find_by(title: params[:category])
         
-        if logged_in 
-            if !params["post"].any? {|key, value| value == ""}
-                @post = Post.new(params["post"])
-                @post.category_id = @category.id
-                @post.user_id = current_user.id
-                @post.score = 1
-                @post.save
+        redirect_if_not_logged_in
+        if !params["post"].any? {|key, value| value == ""}
+            @post = Post.new(params["post"])
+            @post.category_id = @category.id
+            @post.user_id = current_user.id
+            @post.score = 1
+            @post.save
 
-                redirect "/categories/#{@category.title}/posts/#{@post.id}"
-            else 
-                flash[:message] = "All fields required" 
-                redirect '/categories/:category/posts/new'
-            end
-        else
-            flash[:message] = "Oops! Something went wrong." 
-            redirect '/categories/:category/posts/'
+            redirect "/categories/#{@category.title}/posts/#{@post.id}"
+        else 
+            flash[:message] = "All fields required" 
+            redirect '/categories/:category/posts/new'
         end
     end
 
 
     patch '/categories/:category/posts/:id' do
         @category = Category.find_by(title: params[:category])
+        redirect_if_not_logged_in
 
-        if logged_in && is_post_owner
+        if is_post_owner
             @post = Post.find(params[:id])
-            params["post"].each do |key, value|
+            params["post"].each do  |key, value|
                 if value != ""
                     @post.update(key => value)
                 end
@@ -81,8 +76,9 @@ class PostController < ApplicationController
 
     delete '/categories/:category/posts/:id/delete' do
         @category = Category.find_by(title: params[:category])
+        redirect_if_not_logged_in
 
-        if logged_in && is_post_owner
+        if is_post_owner
             @post = Post.find(params[:id])
             @post.destroy
 

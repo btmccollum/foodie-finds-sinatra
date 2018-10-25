@@ -1,7 +1,8 @@
 class UserController < ApplicationController
     
     get '/users/:id/edit' do
-        if logged_in && valid_user
+        redirect_if_not_logged_in 
+        if !!logged_in && !!valid_user
             @user = current_user
             erb :'/users/edit'
         else
@@ -40,17 +41,16 @@ class UserController < ApplicationController
     end
 
     get '/users/:id' do
-        if logged_in && valid_user
+        redirect_if_not_logged_in 
+
+        if valid_user
             @posts = Post.where(user_id: current_user.id)
             @user = current_user
 
             erb :'/users/show'
-        elsif logged_in && !valid_user
+        else
             flash[:message] = "You cannot access another's profile." 
             redirect '/'
-        else
-            flash[:message] = "You must be logged in to access your profile." 
-            redirect '/users/login'
         end
     end
 
@@ -96,7 +96,9 @@ class UserController < ApplicationController
     end
 
     patch '/users/:id' do
-        if logged_in && valid_user
+        redirect_if_not_logged_in 
+
+        if valid_user
             if current_user.authenticate(params["password"])
                 params["user"].each do |key, value|
                     if duplicate_username? && duplicate_email?
@@ -120,7 +122,7 @@ class UserController < ApplicationController
                 redirect "/users/#{current_user.id}"
             end
         else
-            flash[:message] = "You must be logged in to edit your account." 
+            flash[:message] = "You cannot edit another's account." 
             redirect '/'
         end
     end

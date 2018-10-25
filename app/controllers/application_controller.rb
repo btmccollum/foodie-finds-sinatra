@@ -27,29 +27,36 @@ class ApplicationController < Sinatra::Base
     end
 
     def valid_user
-      current_user.id == params[:id].to_i ? true : false
+      current_user.id == params[:id].to_i
     end
 
     def is_post_owner
       @post = Post.find(params[:id])
-      @post.user_id == current_user.id ? true : false
+      @post.user_id == current_user.id
     end
 
     def duplicate_username?
-      User.find_by(username: params["user"]["username"]) ? true : false
+      User.find_by(username: params["user"]["username"])
     end
 
     def duplicate_email?
-      User.find_by(email: params["user"]["email"]) ? true : false
+      User.find_by(email: params["user"]["email"])
     end
 
     def is_comment_owner
       @comment = Comment.find(params[:comment_id])
-      @comment.user_id == current_user.id ? true : false
+      @comment.user_id == current_user.id
     end
 
     def logged_in
       !!current_user
+    end
+
+    def redirect_if_not_logged_in
+      if !logged_in
+        flash[:message] = "Please create an account or log in to continue." 
+        redirect '/'
+      end
     end
   end
 end
