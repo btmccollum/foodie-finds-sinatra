@@ -5,7 +5,7 @@ GIT
     database_cleaner (1.7.0)
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     activemodel (5.2.1)
       activesupport (= 5.2.1)
@@ -129,4 +129,4 @@ DEPENDENCIES
   tux
 
 BUNDLED WITH
-   1.16.5
+   1.17.2

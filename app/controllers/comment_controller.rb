@@ -24,8 +24,10 @@ class CommentController < ApplicationController
     end
 
     post '/categories/:category/posts/:id/comments' do
+        binding.pry
         @category = Category.find_by(title: params[:category])
         @post = Post.find(params[:id])
+        binding.pry
 
         redirect_if_not_logged_in
             
